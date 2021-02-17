@@ -4,90 +4,111 @@ using UnityEngine;
 
 public class ControllerScript : MonoBehaviour
 {
-    public Board board;
+    public FullBoard board;
+    public Board teamBoard;
+    private int currentSpace;
+
+    public Object attackEffect;
 
     // Update is called once per frame
     void Update()
     {
+        #region Numbers
+
         if (Input.GetKeyDown("0"))
         {
             Debug.Log("KeyPressed");
 
-            Transform setTransform = board.GetSpace(0);
-
-            this.transform.position = setTransform.position;
+            Move(0);
         }
 
         if (Input.GetKeyDown("1"))
         {
             Debug.Log("KeyPressed");
 
-            Transform setTransform = board.GetSpace(1);
-
-            this.transform.position = setTransform.position;
+            Move(1);
         }
 
         if (Input.GetKeyDown("2"))
         {
             Debug.Log("KeyPressed");
 
-            Transform setTransform = board.GetSpace(2);
-
-            this.transform.position = setTransform.position;
+            Move(2);
         }
 
         if (Input.GetKeyDown("3"))
         {
             Debug.Log("KeyPressed");
 
-            Transform setTransform = board.GetSpace(3);
-
-            this.transform.position = setTransform.position;
+            Move(3);
         }
 
         if (Input.GetKeyDown("4"))
         {
             Debug.Log("KeyPressed");
 
-            Transform setTransform = board.GetSpace(4);
-
-            this.transform.position = setTransform.position;
+            Move(4);
         }
 
         if (Input.GetKeyDown("5"))
         {
             Debug.Log("KeyPressed");
 
-            Transform setTransform = board.GetSpace(5);
-
-            this.transform.position = setTransform.position;
+            Move(5);
         }
 
         if (Input.GetKeyDown("6"))
         {
             Debug.Log("KeyPressed");
 
-            Transform setTransform = board.GetSpace(6);
-
-            this.transform.position = setTransform.position;
+            Move(6);
         }
 
         if (Input.GetKeyDown("7"))
         {
             Debug.Log("KeyPressed");
 
-            Transform setTransform = board.GetSpace(7);
-
-            this.transform.position = setTransform.position;
+            Move(7);
         }
 
         if (Input.GetKeyDown("8"))
         {
             Debug.Log("KeyPressed");
 
-            Transform setTransform = board.GetSpace(8);
+            Move(8);
+        }
 
-            this.transform.position = setTransform.position;
+        #endregion
+
+        if (Input.GetKeyDown("9"))
+        {
+            Debug.Log("End Turn");
+
+            Attack();
+        }
+    }
+
+    void Move(int spaceIndex)
+    {
+        Transform setTransform = teamBoard.GetSpace(spaceIndex);
+        currentSpace = spaceIndex + 9;
+        this.transform.position = setTransform.position;
+    }
+
+    void Attack()
+    {
+        Transform[] attackTransform = new Transform[3];
+
+        attackTransform[0] = board.GetSpace(currentSpace - 3);
+        attackTransform[1] = board.GetSpace(currentSpace - 6);
+        attackTransform[2] = board.GetSpace(currentSpace - 9);
+
+        foreach (var transform in attackTransform)
+        {
+            if (transform != null)
+            {
+                Instantiate(attackEffect, transform);
+            }
         }
     }
 }
