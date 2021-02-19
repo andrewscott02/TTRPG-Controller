@@ -36,4 +36,18 @@ public class FullBoard : MonoBehaviour
         return null;
     }
 
+    public void HighlightSpace(int space, Color colour)
+    {
+        Material mat = spaces[space].GetComponentInChildren<MeshRenderer>().material;
+        mat.SetColor("_Color", colour);
+    }
+
+    public void ResetHighlight()
+    {
+        foreach (var space in spaces)
+        {
+            Material mat = space.GetComponentInChildren<MeshRenderer>().material;
+            mat.SetColor("_Color", Color.white);
+        }
+    }
 }

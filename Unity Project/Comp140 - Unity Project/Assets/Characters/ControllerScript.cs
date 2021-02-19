@@ -93,15 +93,29 @@ public class ControllerScript : MonoBehaviour
         Transform setTransform = teamBoard.GetSpace(spaceIndex);
         currentSpace = spaceIndex + 9;
         this.transform.position = setTransform.position;
+
+        board.ResetHighlight();
+
+        Invoke("Highlight", 0.15f);
+    }
+
+    void Highlight()
+    {
+        int[] attackSpaces = new int[3];
+
+        attackSpaces[0] = currentSpace - 3;
+        attackSpaces[1] = currentSpace - 6;
+        attackSpaces[2] = currentSpace - 9;
+
+        foreach (var space in attackSpaces)
+        {
+            board.HighlightSpace(space, Color.red);
+        }
     }
 
     void Attack()
     {
-        Transform[] attackTransform = new Transform[3];
-
-        attackTransform[0] = board.GetSpace(currentSpace - 3);
-        attackTransform[1] = board.GetSpace(currentSpace - 6);
-        attackTransform[2] = board.GetSpace(currentSpace - 9);
+        Transform[] attackTransform = GetLineTransforms();
 
         foreach (var transform in attackTransform)
         {
@@ -110,5 +124,16 @@ public class ControllerScript : MonoBehaviour
                 Instantiate(attackEffect, transform);
             }
         }
+    }
+
+    Transform[] GetLineTransforms()
+    {
+        Transform[] lineTransform = new Transform[3];
+
+        lineTransform[0] = board.GetSpace(currentSpace - 3);
+        lineTransform[1] = board.GetSpace(currentSpace - 6);
+        lineTransform[2] = board.GetSpace(currentSpace - 9);
+
+        return lineTransform;
     }
 }
