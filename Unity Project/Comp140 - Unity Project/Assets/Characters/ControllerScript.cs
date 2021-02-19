@@ -103,9 +103,9 @@ public class ControllerScript : MonoBehaviour
             abilityNum = 1;
         }
 
-        if (Input.GetKeyDown("a"))
+        if (Input.GetKeyDown("s"))
         {
-            Debug.Log("choose ability a");
+            Debug.Log("choose ability s");
 
             abilityNum = 2;
         }
@@ -124,11 +124,7 @@ public class ControllerScript : MonoBehaviour
 
     void Highlight()
     {
-        int[] attackSpaces = new int[3];
-
-        attackSpaces[0] = currentSpace - 3;
-        attackSpaces[1] = currentSpace - 6;
-        attackSpaces[2] = currentSpace - 9;
+        int[] attackSpaces = GetAbilitySpaces();
 
         foreach (var space in attackSpaces)
         {
@@ -182,15 +178,20 @@ public class ControllerScript : MonoBehaviour
 
     int[] GetAbilitySpaces()
     {
-        List<int> spaces = new List<int>();
-
+        List<int> spacesList = new List<int>();
         Dictionary<int, Dictionary<Dictionary<bool, int>, bool>> targetSpaces = new Dictionary<int, Dictionary<Dictionary<bool, int>, bool>>();
-
         targetSpaces = GetAbility();
 
-        //get first int from target space dictionaries, add them to a list, add list to array
+        int[] spacesArray = new int[targetSpaces.Keys.Count];
 
-        int[] spacesArray = new int[spaces.Count];
+        foreach (var space in targetSpaces)
+        {
+            int spaceNum = space.Key;
+
+            //int spaceNum = targetSpaces[space.Key];
+
+            spacesList.Add(spaceNum);
+        }
 
         return spacesArray;
     }

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4161593275592778924}
   - component: {fileID: 3320429177081572671}
-  - component: {fileID: 1602857227935998472}
+  - component: {fileID: 7629252630655550395}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -48,7 +48,7 @@ MonoBehaviour:
   board: {fileID: 0}
   teamBoard: {fileID: 0}
   attackEffect: {fileID: 0}
---- !u!114 &1602857227935998472
+--- !u!114 &7629252630655550395
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -57,7 +57,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3149157474940702600}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b673963916ddd44a8c2c2b50c136165, type: 3}
+  m_Script: {fileID: 11500000, guid: dcf56a56d1ddfde42b62d86d7172c53d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &8111890614153760541

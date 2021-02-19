@@ -18,7 +18,7 @@ public class CharacterAttacks : MonoBehaviour
 
     #region Damage
 
-    Dictionary<int, Dictionary<Dictionary<bool, int>, bool>> Disintegration(int currentSpace)
+    public Dictionary<int, Dictionary<Dictionary<bool, int>, bool>> Disintegration(int currentSpace)
     {
         Dictionary<int, Dictionary<Dictionary<bool, int>, bool>> targetSpaces = new Dictionary<int, Dictionary<Dictionary<bool, int>, bool>>();
 
@@ -37,7 +37,7 @@ public class CharacterAttacks : MonoBehaviour
         return targetSpaces;
     }
 
-    Dictionary<int, Dictionary<Dictionary<bool, int>, bool>> WallOfFire(int currentSpace)
+    public Dictionary<int, Dictionary<Dictionary<bool, int>, bool>> WallOfFire(int currentSpace)
     {
         Dictionary<int, Dictionary<Dictionary<bool, int>, bool>> targetSpaces = new Dictionary<int, Dictionary<Dictionary<bool, int>, bool>>();
 
