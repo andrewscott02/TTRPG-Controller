@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class ControllerScript : MonoBehaviour
 {
+    #region Setup
+
+    #region Variables
+
     public FullBoard board;
     public Board teamBoard;
     private int currentSpace;
@@ -13,10 +17,16 @@ public class ControllerScript : MonoBehaviour
     private CharacterAttacks character;
     int abilityNum = 1;
 
+    #endregion
+
     private void Start()
     {
         character = GetComponent<CharacterAttacks>();
     }
+
+    #endregion
+
+    #region Inputs
 
     // Update is called once per frame
     void Update()
@@ -119,6 +129,12 @@ public class ControllerScript : MonoBehaviour
         }
     }
 
+    #endregion
+
+    #region Actions
+
+    #region Movement
+
     void Move(int spaceIndex)
     {
         Transform setTransform = teamBoard.GetSpace(spaceIndex);
@@ -132,21 +148,27 @@ public class ControllerScript : MonoBehaviour
 
     void Highlight()
     {
-        int[] attackSpaces = new int[GetAbilitySpaces().Length];
-        
-        attackSpaces = GetAbilitySpaces();
+        int[] attackSpaces = GetAbilitySpaces();
 
         for (int n = 0; n < attackSpaces.Length; n++)
         {
-            Debug.Log(attackSpaces[n]);
-
             board.HighlightSpace(attackSpaces[n], Color.red);
         }
     }
 
+    #endregion
+
+    #region Attack
+
     void Attack()
     {
-        /*Transform[] attackTransform = GetLineTransforms();
+        int[] attackSpaces = GetAbilitySpaces();
+        Transform[] attackTransform = new Transform[attackSpaces.Length];
+
+        for (int n = 0; n < attackSpaces.Length; n++)
+        {
+            attackTransform[n] = board.GetSpace(attackSpaces[n]);
+        }
 
         foreach (var transform in attackTransform)
         {
@@ -154,8 +176,14 @@ public class ControllerScript : MonoBehaviour
             {
                 Instantiate(attackEffect, transform);
             }
-        }*/
+        }
     }
+
+    #endregion
+
+    #endregion
+
+    #region Helper Functions
 
     Dictionary<int, Dictionary<Dictionary<bool, int>, bool>> GetAbility()
     {
@@ -189,8 +217,6 @@ public class ControllerScript : MonoBehaviour
         {
             int spaceNum = space.Key;
 
-            //int spaceNum = targetSpaces[space.Key];
-
             spacesArray[n] = spaceNum;
 
             n++;
@@ -198,4 +224,6 @@ public class ControllerScript : MonoBehaviour
 
         return spacesArray;
     }
+
+    #endregion
 }
