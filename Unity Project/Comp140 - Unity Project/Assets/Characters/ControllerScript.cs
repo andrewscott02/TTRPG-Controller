@@ -10,6 +10,14 @@ public class ControllerScript : MonoBehaviour
 
     public Object attackEffect;
 
+    private CharacterAttacks character;
+    int abilityNum = 1;
+
+    private void Start()
+    {
+        character = GetComponent<CharacterAttacks>();
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -86,6 +94,21 @@ public class ControllerScript : MonoBehaviour
 
             Attack();
         }
+
+        //Select ability
+        if (Input.GetKeyDown("a"))
+        {
+            Debug.Log("choose ability a");
+
+            abilityNum = 1;
+        }
+
+        if (Input.GetKeyDown("a"))
+        {
+            Debug.Log("choose ability a");
+
+            abilityNum = 2;
+        }
     }
 
     void Move(int spaceIndex)
@@ -135,5 +158,25 @@ public class ControllerScript : MonoBehaviour
         lineTransform[2] = board.GetSpace(currentSpace - 9);
 
         return lineTransform;
+    }
+
+    Dictionary<int, Dictionary<Dictionary<bool, int>, bool>> GetAbility()
+    {
+        Dictionary<int, Dictionary<Dictionary<bool, int>, bool>> targetSpaces = new Dictionary<int, Dictionary<Dictionary<bool, int>, bool>>();
+
+        if (abilityNum == 1)
+        {
+            targetSpaces = character.ability1(currentSpace);
+        }
+        if (abilityNum == 2)
+        {
+            targetSpaces = character.ability2(currentSpace);
+        }
+        if (abilityNum == 3)
+        {
+            targetSpaces = character.ability3(currentSpace);
+        }
+
+        return targetSpaces;
     }
 }
