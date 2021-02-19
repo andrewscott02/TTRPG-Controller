@@ -39,7 +39,6 @@ public class FullBoard : MonoBehaviour
     public void HighlightSpace(int space, Color colour)
     {
         Material mat = spaces[space].GetComponentInChildren<MeshRenderer>().material;
-        Debug.Log(space);
         mat.SetColor("_Color", colour);
     }
 

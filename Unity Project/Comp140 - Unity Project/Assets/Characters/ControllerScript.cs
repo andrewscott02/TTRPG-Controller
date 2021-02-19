@@ -101,6 +101,10 @@ public class ControllerScript : MonoBehaviour
             Debug.Log("choose ability a");
 
             abilityNum = 1;
+
+            board.ResetHighlight();
+
+            Invoke("Highlight", 0.15f);
         }
 
         if (Input.GetKeyDown("s"))
@@ -108,6 +112,10 @@ public class ControllerScript : MonoBehaviour
             Debug.Log("choose ability s");
 
             abilityNum = 2;
+
+            board.ResetHighlight();
+
+            Invoke("Highlight", 0.15f);
         }
     }
 
@@ -124,17 +132,21 @@ public class ControllerScript : MonoBehaviour
 
     void Highlight()
     {
-        int[] attackSpaces = GetAbilitySpaces();
+        int[] attackSpaces = new int[GetAbilitySpaces().Length];
+        
+        attackSpaces = GetAbilitySpaces();
 
-        foreach (var space in attackSpaces)
+        for (int n = 0; n < attackSpaces.Length; n++)
         {
-            board.HighlightSpace(space, Color.red);
+            Debug.Log(attackSpaces[n]);
+
+            board.HighlightSpace(attackSpaces[n], Color.red);
         }
     }
 
     void Attack()
     {
-        Transform[] attackTransform = GetLineTransforms();
+        /*Transform[] attackTransform = GetLineTransforms();
 
         foreach (var transform in attackTransform)
         {
@@ -142,18 +154,7 @@ public class ControllerScript : MonoBehaviour
             {
                 Instantiate(attackEffect, transform);
             }
-        }
-    }
-
-    Transform[] GetLineTransforms()
-    {
-        Transform[] lineTransform = new Transform[3];
-
-        lineTransform[0] = board.GetSpace(currentSpace - 3);
-        lineTransform[1] = board.GetSpace(currentSpace - 6);
-        lineTransform[2] = board.GetSpace(currentSpace - 9);
-
-        return lineTransform;
+        }*/
     }
 
     Dictionary<int, Dictionary<Dictionary<bool, int>, bool>> GetAbility()
@@ -178,11 +179,11 @@ public class ControllerScript : MonoBehaviour
 
     int[] GetAbilitySpaces()
     {
-        List<int> spacesList = new List<int>();
         Dictionary<int, Dictionary<Dictionary<bool, int>, bool>> targetSpaces = new Dictionary<int, Dictionary<Dictionary<bool, int>, bool>>();
         targetSpaces = GetAbility();
 
         int[] spacesArray = new int[targetSpaces.Keys.Count];
+        int n = 0;
 
         foreach (var space in targetSpaces)
         {
@@ -190,7 +191,9 @@ public class ControllerScript : MonoBehaviour
 
             //int spaceNum = targetSpaces[space.Key];
 
-            spacesList.Add(spaceNum);
+            spacesArray[n] = spaceNum;
+
+            n++;
         }
 
         return spacesArray;

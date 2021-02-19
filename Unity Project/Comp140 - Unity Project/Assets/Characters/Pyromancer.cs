@@ -7,6 +7,6 @@ public class Pyromancer : CharacterAttacks
     private void Start()
     {
         ability1 = Disintegration;
-        ability1 = WallOfFire;
+        ability2 = WallOfFire;
     }
 }
