@@ -179,4 +179,19 @@ public class ControllerScript : MonoBehaviour
 
         return targetSpaces;
     }
+
+    int[] GetAbilitySpaces()
+    {
+        List<int> spaces = new List<int>();
+
+        Dictionary<int, Dictionary<Dictionary<bool, int>, bool>> targetSpaces = new Dictionary<int, Dictionary<Dictionary<bool, int>, bool>>();
+
+        targetSpaces = GetAbility();
+
+        //get first int from target space dictionaries, add them to a list, add list to array
+
+        int[] spacesArray = new int[spaces.Count];
+
+        return spacesArray;
+    }
 }
