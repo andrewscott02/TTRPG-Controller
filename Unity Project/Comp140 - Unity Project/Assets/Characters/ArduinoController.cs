@@ -96,22 +96,6 @@ public class ArduinoController : MonoBehaviour
         }
     }
 
-    bool GetIsPlacedDigital(int pinToRead)
-    {
-        int analogValue = UduinoManager.Instance.digitalRead(pinToRead);
-
-        float direction = MapIntToFloat(analogValue, calMin, calMax, -1f, 1f);
-
-        if (direction > 0)
-        {
-            return false;
-        }
-        else
-        {
-            return true;
-        }
-    }
-
     bool GetIsPlacedAnalog(AnalogPin pinToRead)
     {
         int analogValue = UduinoManager.Instance.analogRead(pinToRead);
