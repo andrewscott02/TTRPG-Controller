@@ -179,7 +179,7 @@ PrefabInstance:
     - target: {fileID: 3537645339169220041, guid: b5caf1431a1fa374e885d952fd337107,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.3
+      value: 1.15
       objectReference: {fileID: 0}
     - target: {fileID: 3537645339169220041, guid: b5caf1431a1fa374e885d952fd337107,
         type: 3}
@@ -260,7 +260,7 @@ PrefabInstance:
     - target: {fileID: 3537645339169220041, guid: b5caf1431a1fa374e885d952fd337107,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -1.15
       objectReference: {fileID: 0}
     - target: {fileID: 3537645339169220041, guid: b5caf1431a1fa374e885d952fd337107,
         type: 3}
@@ -341,7 +341,7 @@ PrefabInstance:
     - target: {fileID: 3537645339169220041, guid: b5caf1431a1fa374e885d952fd337107,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -1.15
       objectReference: {fileID: 0}
     - target: {fileID: 3537645339169220041, guid: b5caf1431a1fa374e885d952fd337107,
         type: 3}
@@ -422,7 +422,7 @@ PrefabInstance:
     - target: {fileID: 3537645339169220041, guid: b5caf1431a1fa374e885d952fd337107,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.3
+      value: 1.15
       objectReference: {fileID: 0}
     - target: {fileID: 3537645339169220041, guid: b5caf1431a1fa374e885d952fd337107,
         type: 3}
@@ -503,7 +503,7 @@ PrefabInstance:
     - target: {fileID: 3537645339169220041, guid: b5caf1431a1fa374e885d952fd337107,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -1.15
       objectReference: {fileID: 0}
     - target: {fileID: 3537645339169220041, guid: b5caf1431a1fa374e885d952fd337107,
         type: 3}
@@ -584,7 +584,7 @@ PrefabInstance:
     - target: {fileID: 3537645339169220041, guid: b5caf1431a1fa374e885d952fd337107,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.3
+      value: 1.15
       objectReference: {fileID: 0}
     - target: {fileID: 3537645339169220041, guid: b5caf1431a1fa374e885d952fd337107,
         type: 3}

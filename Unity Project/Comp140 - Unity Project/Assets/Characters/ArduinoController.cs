@@ -59,7 +59,6 @@ public class ArduinoController : MonoBehaviour
             {
                 space = i;
                 placed = true;
-                i++;
             }
             i++;
         }

@@ -77,7 +77,6 @@ public class CharacterAttacks : MonoBehaviour
         for (int n = 0; n < spaces; n++)
         {
             lineSpaces[n] = currentSpace - (n+2)*3;
-            Debug.Log(lineSpaces[n]);
         }
 
         return lineSpaces;
