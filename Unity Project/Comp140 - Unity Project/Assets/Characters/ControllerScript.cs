@@ -135,7 +135,7 @@ public class ControllerScript : MonoBehaviour
 
     #region Movement
 
-    void Move(int spaceIndex)
+    public void Move(int spaceIndex)
     {
         Transform setTransform = teamBoard.GetSpace(spaceIndex);
         currentSpace = spaceIndex + 9;
