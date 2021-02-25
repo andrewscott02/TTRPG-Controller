@@ -41,12 +41,12 @@ public class CharacterAttacks : MonoBehaviour
     {
         Dictionary<int, Dictionary<Dictionary<bool, int>, bool>> targetSpaces = new Dictionary<int, Dictionary<Dictionary<bool, int>, bool>>();
 
-        int[] line = GetRow(currentSpace, 3);
+        int[] line = GetRow(currentSpace, 2);
 
         for (int n = 0; n < 3; n++)
         {
             Dictionary<bool, int> basicEffect = new Dictionary<bool, int>();
-            basicEffect.Add(true, 4);
+            basicEffect.Add(true, 2);
 
             Dictionary<Dictionary<bool, int>, bool> effect = new Dictionary<Dictionary<bool, int>, bool>();
             effect.Add(basicEffect, false);
@@ -76,7 +76,7 @@ public class CharacterAttacks : MonoBehaviour
 
         for (int n = 0; n < spaces; n++)
         {
-            lineSpaces[n] = currentSpace - (n+2)*3;
+            lineSpaces[n] = currentSpace - (n+1)*3;
         }
 
         return lineSpaces;

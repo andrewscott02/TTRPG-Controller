@@ -8,21 +8,11 @@ public class ControllerScript : MonoBehaviour
 
     #region Variables
 
-    public FullBoard board;
-    public Board teamBoard;
-    private int currentSpace;
+    public GameObject[] characters;
 
-    public Object attackEffect;
-
-    private CharacterAttacks character;
-    int abilityNum = 1;
+    private GameObject currentCharacter;
 
     #endregion
-
-    private void Start()
-    {
-        character = GetComponent<CharacterAttacks>();
-    }
 
     #endregion
 
@@ -32,7 +22,7 @@ public class ControllerScript : MonoBehaviour
     void Update()
     {
         #region Numbers
-
+        /*
         if (Input.GetKeyDown("0"))
         {
             Debug.Log("KeyPressed");
@@ -95,14 +85,24 @@ public class ControllerScript : MonoBehaviour
 
             Move(8);
         }
-
+        */
         #endregion
 
-        if (Input.GetKeyDown("9"))
+        if (Input.GetKeyDown("j"))
         {
             Debug.Log("End Turn");
 
             Attack();
+        }
+
+        //Select Character
+        if (Input.GetKeyDown("q"))
+        {
+            Debug.Log("choose character q");
+
+            //select first character
+
+            currentCharacter = characters[0];
         }
 
         //Select ability
@@ -110,22 +110,14 @@ public class ControllerScript : MonoBehaviour
         {
             Debug.Log("choose ability a");
 
-            abilityNum = 1;
-
-            board.ResetHighlight();
-
-            Invoke("Highlight", 0.15f);
+            currentCharacter.GetComponentInChildren<CharacterMovement>().SelectAbility(1);
         }
 
         if (Input.GetKeyDown("s"))
         {
             Debug.Log("choose ability s");
 
-            abilityNum = 2;
-
-            board.ResetHighlight();
-
-            Invoke("Highlight", 0.15f);
+            currentCharacter.GetComponentInChildren<CharacterMovement>().SelectAbility(2);
         }
     }
 
@@ -137,23 +129,12 @@ public class ControllerScript : MonoBehaviour
 
     public void Move(int spaceIndex)
     {
-        Transform setTransform = teamBoard.GetSpace(spaceIndex);
-        currentSpace = spaceIndex + 9;
-        this.transform.position = setTransform.position;
-
-        board.ResetHighlight();
-
-        Invoke("Highlight", 0.15f);
+        currentCharacter.GetComponentInChildren<CharacterMovement>().Move(spaceIndex);
     }
 
-    void Highlight()
+    public void IdlePosition()
     {
-        int[] attackSpaces = GetAbilitySpaces();
-
-        for (int n = 0; n < attackSpaces.Length; n++)
-        {
-            board.HighlightSpace(attackSpaces[n], Color.red);
-        }
+        currentCharacter.GetComponentInChildren<CharacterMovement>().IdlePosition();
     }
 
     #endregion
@@ -162,68 +143,13 @@ public class ControllerScript : MonoBehaviour
 
     void Attack()
     {
-        int[] attackSpaces = GetAbilitySpaces();
-        Transform[] attackTransform = new Transform[attackSpaces.Length];
-
-        for (int n = 0; n < attackSpaces.Length; n++)
+        foreach (var item in characters)
         {
-            attackTransform[n] = board.GetSpace(attackSpaces[n]);
-        }
-
-        foreach (var transform in attackTransform)
-        {
-            if (transform != null)
-            {
-                Instantiate(attackEffect, transform);
-            }
+            item.GetComponentInChildren<CharacterMovement>().Attack();
         }
     }
 
     #endregion
-
-    #endregion
-
-    #region Helper Functions
-
-    Dictionary<int, Dictionary<Dictionary<bool, int>, bool>> GetAbility()
-    {
-        Dictionary<int, Dictionary<Dictionary<bool, int>, bool>> targetSpaces = new Dictionary<int, Dictionary<Dictionary<bool, int>, bool>>();
-
-        if (abilityNum == 1)
-        {
-            targetSpaces = character.ability1(currentSpace);
-        }
-        if (abilityNum == 2)
-        {
-            targetSpaces = character.ability2(currentSpace);
-        }
-        if (abilityNum == 3)
-        {
-            targetSpaces = character.ability3(currentSpace);
-        }
-
-        return targetSpaces;
-    }
-
-    int[] GetAbilitySpaces()
-    {
-        Dictionary<int, Dictionary<Dictionary<bool, int>, bool>> targetSpaces = new Dictionary<int, Dictionary<Dictionary<bool, int>, bool>>();
-        targetSpaces = GetAbility();
-
-        int[] spacesArray = new int[targetSpaces.Keys.Count];
-        int n = 0;
-
-        foreach (var space in targetSpaces)
-        {
-            int spaceNum = space.Key;
-
-            spacesArray[n] = spaceNum;
-
-            n++;
-        }
-
-        return spacesArray;
-    }
 
     #endregion
 }

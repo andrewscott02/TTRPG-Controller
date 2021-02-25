@@ -55,6 +55,8 @@ public class ArduinoController : MonoBehaviour
         int i = 0;
         foreach (var item in pins)
         {
+            //add another if statement to check if another figure is on the space, if true, do not change the current space, skip to i++ and return
+
             if (item == true)
             {
                 space = i;
@@ -63,13 +65,17 @@ public class ArduinoController : MonoBehaviour
             i++;
         }
         
-        if (space != currentSpace)
+        if (placed == true)
         {
-            if (placed == true)
+            if (space != currentSpace)
             {
                 Move(space);
                 currentSpace = space;
             }
+        }
+        else
+        {
+            controller.IdlePosition();
         }
 
         /*
@@ -90,10 +96,7 @@ public class ArduinoController : MonoBehaviour
 
     private void Move(int space)
     {
-        if (space != null)
-        {
-            controller.Move(space);
-        }
+        controller.Move(space);
     }
 
     bool GetIsPlacedAnalog(AnalogPin pinToRead)
