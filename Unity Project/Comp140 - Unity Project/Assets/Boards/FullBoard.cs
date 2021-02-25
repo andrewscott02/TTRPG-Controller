@@ -29,7 +29,7 @@ public class FullBoard : MonoBehaviour
 
     public Transform GetSpace(int space)
     {
-        if (spaces[space].transform.Find("Anchor") != null)
+        if (IsSpaceValid(space))
         {
             return spaces[space].transform.Find("Anchor");
         }
@@ -38,8 +38,11 @@ public class FullBoard : MonoBehaviour
 
     public void HighlightSpace(int space, Color colour)
     {
-        Material mat = spaces[space].GetComponentInChildren<MeshRenderer>().material;
-        mat.SetColor("_Color", colour);
+        if (IsSpaceValid(space))
+        {
+            Material mat = spaces[space].GetComponentInChildren<MeshRenderer>().material;
+            mat.SetColor("_Color", colour);
+        }
     }
 
     public void ResetHighlight()
@@ -49,5 +52,10 @@ public class FullBoard : MonoBehaviour
             Material mat = space.GetComponentInChildren<MeshRenderer>().material;
             mat.SetColor("_Color", Color.white);
         }
+    }
+
+    public bool IsSpaceValid(int space)
+    {
+        return space >= 0 && space < spaces.Length;
     }
 }
