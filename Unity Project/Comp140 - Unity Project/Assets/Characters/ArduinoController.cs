@@ -63,7 +63,6 @@ public class ArduinoController : MonoBehaviour
 
                 if (spaceScript.GetSpace())
                 {
-                    Debug.Log(i + " Can be placed");
                     space = i;
                     placed = true;
                 }
@@ -72,13 +71,8 @@ public class ArduinoController : MonoBehaviour
                     //check that character is not the current character
                     if (spaceScript.character == controller.CheckCharacter())
                     {
-                        Debug.Log(i + " Can be placed");
                         space = i;
                         placed = true;
-                    }
-                    else
-                    {
-                        Debug.Log(i + " Can't be placed");
                     }
                 }
             }
