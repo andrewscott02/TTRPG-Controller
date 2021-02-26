@@ -6,6 +6,8 @@ public class CharacterAttacks : MonoBehaviour
 {
     #region Variables
 
+    private FullBoard board;
+
     public delegate Dictionary<int, Dictionary<Dictionary<bool, int>, bool>> Ability(int currentSpace);
 
     public Ability ability1;
@@ -13,6 +15,12 @@ public class CharacterAttacks : MonoBehaviour
     public Ability ability3;
 
     #endregion
+
+    private void Awake()
+    {
+        GameObject reference = GameObject.Find("Board");
+        board = reference.GetComponent<FullBoard>();
+    }
 
     #region Abilities
 
@@ -27,7 +35,8 @@ public class CharacterAttacks : MonoBehaviour
         for (int n = 0; n < 3; n++)
         {
             Dictionary<bool, int> basicEffect = new Dictionary<bool, int>();
-            basicEffect.Add(true, 6/(n+1));
+            basicEffect.Add(true, 4);
+            //basicEffect.Add(true, 6 / (n + 1));
 
             Dictionary<Dictionary<bool, int>, bool> effect = new Dictionary<Dictionary<bool, int>, bool>();
             effect.Add(basicEffect, false);
@@ -60,9 +69,66 @@ public class CharacterAttacks : MonoBehaviour
 
     #region Control
 
+    public Dictionary<int, Dictionary<Dictionary<bool, int>, bool>> FreezingGrasp(int currentSpace)
+    {
+        Dictionary<int, Dictionary<Dictionary<bool, int>, bool>> targetSpaces = new Dictionary<int, Dictionary<Dictionary<bool, int>, bool>>();
+
+        int[] line = GetColumn(currentSpace, 3);
+
+        for (int n = 0; n < 3; n++)
+        {
+            if (board.IsSpaceValid(line[n]))
+            {
+                Space space = board.spaces[line[n]].GetComponent<Space>();
+
+                if (space.GetSpace())
+                {
+                    Dictionary<bool, int> basicEffect = new Dictionary<bool, int>();
+                    basicEffect.Add(true, 4);
+                    //basicEffect.Add(true, 6 / (n + 1));
+
+                    Dictionary<Dictionary<bool, int>, bool> effect = new Dictionary<Dictionary<bool, int>, bool>();
+                    effect.Add(basicEffect, true);
+
+                    targetSpaces.Add(line[n], effect);
+                }
+                else
+                {
+                    Dictionary<bool, int> basicEffect = new Dictionary<bool, int>();
+                    basicEffect.Add(true, 4);
+                    //basicEffect.Add(true, 6 / (n + 1));
+
+                    Dictionary<Dictionary<bool, int>, bool> effect = new Dictionary<Dictionary<bool, int>, bool>();
+                    effect.Add(basicEffect, true);
+
+                    targetSpaces.Add(line[n], effect);
+
+                    return targetSpaces;
+                }
+            }
+        }
+        return targetSpaces;
+    }
+
     #endregion
 
     #region Healing
+
+    public Dictionary<int, Dictionary<Dictionary<bool, int>, bool>> FrozenArmour(int currentSpace)
+    {
+        Dictionary<int, Dictionary<Dictionary<bool, int>, bool>> targetSpaces = new Dictionary<int, Dictionary<Dictionary<bool, int>, bool>>();
+
+        Dictionary<bool, int> basicEffect = new Dictionary<bool, int>();
+        basicEffect.Add(false, 4);
+        //basicEffect.Add(true, 6 / (n + 1));
+
+        Dictionary<Dictionary<bool, int>, bool> effect = new Dictionary<Dictionary<bool, int>, bool>();
+        effect.Add(basicEffect, false);
+
+        targetSpaces.Add(currentSpace, effect);
+
+        return targetSpaces;
+    }
 
     #endregion
 
