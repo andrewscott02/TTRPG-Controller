@@ -26,7 +26,7 @@ public class CharacterMovement : MonoBehaviour
     {
         character = GetComponent<CharacterAttacks>();
 
-        IdlePosition();
+        SetUpPosition();
     }
 
     #endregion
@@ -37,25 +37,45 @@ public class CharacterMovement : MonoBehaviour
 
     public void Move(int spaceIndex)
     {
+        SetSpace(currentSpace, null);
+
         Transform setTransform = teamBoard.GetSpace(spaceIndex);
         currentSpace = spaceIndex + 6;
         this.transform.position = setTransform.position;
 
-        board.ResetHighlight();
-
-        Invoke("Highlight", 0.15f);
+        SetSpace(currentSpace, this.gameObject);
     }
 
     public void IdlePosition()
+    {
+        SetSpace(currentSpace, null);
+
+        Transform setTransform = teamBoard.GetSpace(idleSpace);
+        currentSpace = idleSpace + 6;
+        this.transform.position = setTransform.position;
+
+        SetSpace(currentSpace, this.gameObject);
+    }
+
+    public void SetUpPosition()
     {
         Transform setTransform = teamBoard.GetSpace(idleSpace);
         currentSpace = idleSpace + 6;
         this.transform.position = setTransform.position;
 
-        board.ResetHighlight();
+        Space spaceScript = board.spaces[currentSpace].GetComponent<Space>();
+
+        spaceScript.SetSpace(this.gameObject);
     }
 
-    void Highlight()
+    public void SetSpace(int space, GameObject newCharacter)
+    {
+        Space spaceScript = board.spaces[space].GetComponent<Space>();
+
+        spaceScript.SetSpace(newCharacter);
+    }
+
+    public void Highlight()
     {
         int[] attackSpaces = GetAbilitySpaces();
 

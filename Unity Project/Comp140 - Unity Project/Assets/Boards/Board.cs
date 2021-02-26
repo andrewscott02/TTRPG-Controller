@@ -5,7 +5,7 @@ using UnityEngine;
 public class Board : MonoBehaviour
 {
     public int width = 3;
-    public int height = 2;
+    public int height = 3;
     private int boardSize;
 
     public GameObject[] spaces;

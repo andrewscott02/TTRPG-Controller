@@ -5,6 +5,8 @@ using Uduino;
 
 public class ArduinoController : MonoBehaviour
 {
+    public FullBoard boardRef;
+
     private bool[] pins = new bool[6];
 
     private int currentSpace = 7;
@@ -59,8 +61,13 @@ public class ArduinoController : MonoBehaviour
 
             if (item == true)
             {
-                space = i;
-                placed = true;
+                Space spaceScript = boardRef.spaces[i].GetComponent<Space>();
+
+                if (spaceScript.GetSpace())
+                {
+                    space = i;
+                    placed = true;
+                }
             }
             i++;
         }

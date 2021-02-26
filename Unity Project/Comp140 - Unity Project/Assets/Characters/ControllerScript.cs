@@ -9,10 +9,16 @@ public class ControllerScript : MonoBehaviour
     #region Variables
 
     public GameObject[] characters;
-
     private GameObject currentCharacter;
 
+    public FullBoard board;
+
     #endregion
+
+    private void Start()
+    {
+        //currentCharacter = characters[0];
+    }
 
     #endregion
 
@@ -90,9 +96,7 @@ public class ControllerScript : MonoBehaviour
 
         if (Input.GetKeyDown("j"))
         {
-            Debug.Log("End Turn");
-
-            Attack();
+            TryEndTurn();
         }
 
         //Select Character
@@ -105,19 +109,37 @@ public class ControllerScript : MonoBehaviour
             currentCharacter = characters[0];
         }
 
+        if (Input.GetKeyDown("w"))
+        {
+            Debug.Log("choose character w");
+
+            //select first character
+
+            currentCharacter = characters[1];
+        }
+
+        if (Input.GetKeyDown("e"))
+        {
+            Debug.Log("choose character e");
+
+            //select first character
+
+            currentCharacter = characters[2];
+        }
+
         //Select ability
         if (Input.GetKeyDown("a"))
         {
             Debug.Log("choose ability a");
 
-            currentCharacter.GetComponentInChildren<CharacterMovement>().SelectAbility(1);
+            SelectSpell(1);
         }
 
         if (Input.GetKeyDown("s"))
         {
             Debug.Log("choose ability s");
 
-            currentCharacter.GetComponentInChildren<CharacterMovement>().SelectAbility(2);
+            SelectSpell(2);
         }
     }
 
@@ -125,24 +147,96 @@ public class ControllerScript : MonoBehaviour
 
     #region Actions
 
+    void Highlight()
+    {
+        foreach (var space in board.spaces)
+        {
+            Space spaceScript = space.GetComponent<Space>();
+
+            if (spaceScript.character != null)
+            {
+                CharacterMovement moveScript = spaceScript.character.GetComponent<CharacterMovement>();
+                if (!spaceScript.idle)
+                {
+                    moveScript.Highlight();
+                }
+            }
+        }
+    }
+
     #region Movement
 
     public void Move(int spaceIndex)
     {
-        currentCharacter.GetComponentInChildren<CharacterMovement>().Move(spaceIndex);
+        if (currentCharacter != null)
+        {
+            currentCharacter.GetComponentInChildren<CharacterMovement>().Move(spaceIndex);
+        }
+
+        board.ResetHighlight();
+
+        Highlight();
     }
 
     public void IdlePosition()
     {
-        currentCharacter.GetComponentInChildren<CharacterMovement>().IdlePosition();
+        if (currentCharacter != null)
+        {
+            currentCharacter.GetComponentInChildren<CharacterMovement>().IdlePosition();
+        }
+
+        board.ResetHighlight();
+
+        Highlight();
     }
 
     #endregion
 
-    #region Attack
+    #region Spell Selection
+
+    public void SelectSpell(int spell)
+    {
+        if (currentCharacter != null)
+        {
+            currentCharacter.GetComponentInChildren<CharacterMovement>().SelectAbility(spell);
+        }
+
+        board.ResetHighlight();
+
+        Highlight();
+    }
+
+    #endregion
+
+    #region End Turn
+
+    void TryEndTurn()
+    {
+        Debug.Log("TryEndTurn");
+
+        bool canEndTurn = true;
+        foreach (var space in board.spaces)
+        {
+            Space spaceScript = space.GetComponent<Space>();
+
+            if (spaceScript.character != null)
+            {
+                if (spaceScript.idle)
+                {
+                    canEndTurn = false;
+                }
+            }
+        }
+        Debug.Log(canEndTurn);
+        if (canEndTurn)
+        {
+            Attack();
+        }
+    }
 
     void Attack()
     {
+        Debug.Log("EndTurn");
         foreach (var item in characters)
         {
             item.GetComponentInChildren<CharacterMovement>().Attack();
