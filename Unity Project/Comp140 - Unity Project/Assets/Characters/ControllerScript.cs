@@ -22,6 +22,11 @@ public class ControllerScript : MonoBehaviour
 
     #endregion
 
+    public GameObject CheckCharacter()
+    {
+        return currentCharacter;
+    }
+
     #region Inputs
 
     // Update is called once per frame
@@ -118,6 +123,7 @@ public class ControllerScript : MonoBehaviour
             currentCharacter = characters[1];
         }
 
+        /*
         if (Input.GetKeyDown("e"))
         {
             Debug.Log("choose character e");
@@ -126,6 +132,7 @@ public class ControllerScript : MonoBehaviour
 
             currentCharacter = characters[2];
         }
+        */
 
         //Select ability
         if (Input.GetKeyDown("a"))

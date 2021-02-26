@@ -9,8 +9,6 @@ public class ArduinoController : MonoBehaviour
 
     private bool[] pins = new bool[6];
 
-    private int currentSpace = 7;
-
     private ControllerScript controller;
 
     [Range(0, 1023)]
@@ -61,12 +59,27 @@ public class ArduinoController : MonoBehaviour
 
             if (item == true)
             {
-                Space spaceScript = boardRef.spaces[i].GetComponent<Space>();
+                Space spaceScript = boardRef.spaces[i + 6].GetComponent<Space>();
 
                 if (spaceScript.GetSpace())
                 {
+                    Debug.Log(i + " Can be placed");
                     space = i;
                     placed = true;
+                }
+                else
+                {
+                    //check that character is not the current character
+                    if (spaceScript.character == controller.CheckCharacter())
+                    {
+                        Debug.Log(i + " Can be placed");
+                        space = i;
+                        placed = true;
+                    }
+                    else
+                    {
+                        Debug.Log(i + " Can't be placed");
+                    }
                 }
             }
             i++;
@@ -74,11 +87,7 @@ public class ArduinoController : MonoBehaviour
         
         if (placed == true)
         {
-            if (space != currentSpace)
-            {
-                Move(space);
-                currentSpace = space;
-            }
+            Move(space);
         }
         else
         {
