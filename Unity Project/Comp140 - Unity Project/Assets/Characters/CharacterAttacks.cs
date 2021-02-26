@@ -65,6 +65,47 @@ public class CharacterAttacks : MonoBehaviour
         return targetSpaces;
     }
 
+    public Dictionary<int, Dictionary<Dictionary<bool, int>, bool>> ConeOfCold(int currentSpace)
+    {
+        Dictionary<int, Dictionary<Dictionary<bool, int>, bool>> targetSpaces = new Dictionary<int, Dictionary<Dictionary<bool, int>, bool>>();
+
+        int[] line = GetColumn(currentSpace, 2);
+
+        for (int n = 0; n < 2; n++)
+        {
+            Dictionary<bool, int> basicEffect = new Dictionary<bool, int>();
+            basicEffect.Add(true, 6 / (n + 1));
+
+            Dictionary<Dictionary<bool, int>, bool> effect = new Dictionary<Dictionary<bool, int>, bool>();
+            effect.Add(basicEffect, false);
+
+            targetSpaces.Add(line[n], effect);
+        }
+
+        int[] sides = GetSides(currentSpace, 2);
+
+        for (int n = 0; n < 3; n++)
+        {
+            if (board.IsSpaceValid(sides[n]))
+            {
+                Space space = board.spaces[line[n]].GetComponent<Space>();
+
+                if (space.GetSpace())
+                {
+                    Dictionary<bool, int> basicEffect = new Dictionary<bool, int>();
+                    basicEffect.Add(true, 3);
+
+                    Dictionary<Dictionary<bool, int>, bool> effect = new Dictionary<Dictionary<bool, int>, bool>();
+                    effect.Add(basicEffect, false);
+
+                    targetSpaces.Add(line[n], effect);
+                }
+            }
+        }
+
+        return targetSpaces;
+    }
+
     #endregion
 
     #region Control
@@ -113,6 +154,47 @@ public class CharacterAttacks : MonoBehaviour
     #endregion
 
     #region Healing
+
+    public Dictionary<int, Dictionary<Dictionary<bool, int>, bool>> HealingBurst(int currentSpace)
+    {
+        Dictionary<int, Dictionary<Dictionary<bool, int>, bool>> targetSpaces = new Dictionary<int, Dictionary<Dictionary<bool, int>, bool>>();
+
+        int[] line = GetColumn(currentSpace, 1);
+
+        for (int n = 0; n < 1; n++)
+        {
+            Dictionary<bool, int> basicEffect = new Dictionary<bool, int>();
+            basicEffect.Add(false, 3);
+
+            Dictionary<Dictionary<bool, int>, bool> effect = new Dictionary<Dictionary<bool, int>, bool>();
+            effect.Add(basicEffect, false);
+
+            targetSpaces.Add(line[n], effect);
+        }
+
+        int[] sides = GetSides(currentSpace, 2);
+
+        for (int n = 0; n < 3; n++)
+        {
+            if (board.IsSpaceValid(sides[n]))
+            {
+                Space space = board.spaces[line[n]].GetComponent<Space>();
+
+                if (space.GetSpace())
+                {
+                    Dictionary<bool, int> basicEffect = new Dictionary<bool, int>();
+                    basicEffect.Add(false, 2);
+
+                    Dictionary<Dictionary<bool, int>, bool> effect = new Dictionary<Dictionary<bool, int>, bool>();
+                    effect.Add(basicEffect, false);
+
+                    targetSpaces.Add(line[n], effect);
+                }
+            }
+        }
+
+        return targetSpaces;
+    }
 
     public Dictionary<int, Dictionary<Dictionary<bool, int>, bool>> FrozenArmour(int currentSpace)
     {
@@ -166,6 +248,39 @@ public class CharacterAttacks : MonoBehaviour
         lineSpaces[0] = centerSpace - (3 * spaceOffset);
         lineSpaces[1] = centerSpace - (spaceOffset * 3) + 1;
         lineSpaces[2] = centerSpace - (spaceOffset * 3) - 1;
+
+        return lineSpaces;
+    }
+
+    int[] GetSides(int currentSpace, int spaceOffset)
+    {
+        List<int> spacesList = new List<int>();
+
+        if ((currentSpace - 1) % 3 == 0)
+        {
+            spacesList.Add(currentSpace - (3 * spaceOffset) + 1);
+            spacesList.Add(currentSpace - (3 * spaceOffset) - 1);
+        }
+
+        if ((currentSpace) % 3 == 0)
+        {
+            spacesList.Add(currentSpace - (3 * spaceOffset) + 1);
+        }
+
+        if ((currentSpace - 2) % 3 == 0)
+        {
+            spacesList.Add(currentSpace - (3 * spaceOffset) - 1);
+        }
+
+        int[] lineSpaces = new int[spacesList.Count];
+
+        int i = 0;
+        foreach (var item in spacesList)
+        {
+            lineSpaces[i] = item;
+
+            i++;
+        }
 
         return lineSpaces;
     }

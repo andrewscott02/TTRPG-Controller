@@ -148,6 +148,13 @@ public class ControllerScript : MonoBehaviour
 
             SelectSpell(2);
         }
+
+        if (Input.GetKeyDown("d"))
+        {
+            Debug.Log("choose ability d");
+
+            SelectSpell(3);
+        }
     }
 
     #endregion
@@ -219,8 +226,6 @@ public class ControllerScript : MonoBehaviour
 
     void TryEndTurn()
     {
-        Debug.Log("TryEndTurn");
-
         bool canEndTurn = true;
         foreach (var space in board.spaces)
         {
@@ -234,7 +239,7 @@ public class ControllerScript : MonoBehaviour
                 }
             }
         }
-        Debug.Log(canEndTurn);
+
         if (canEndTurn)
         {
             Attack();
