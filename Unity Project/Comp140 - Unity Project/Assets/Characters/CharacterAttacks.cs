@@ -32,7 +32,7 @@ public class CharacterAttacks : MonoBehaviour
 
         int[] line = GetColumn(currentSpace, 3);
 
-        for (int n = 0; n < 3; n++)
+        for (int n = 0; n < line.Length; n++)
         {
             Dictionary<bool, int> basicEffect = new Dictionary<bool, int>();
             basicEffect.Add(true, 4);
@@ -52,7 +52,7 @@ public class CharacterAttacks : MonoBehaviour
 
         int[] line = GetRow(currentSpace, 2);
 
-        for (int n = 0; n < 3; n++)
+        for (int n = 0; n < line.Length; n++)
         {
             Dictionary<bool, int> basicEffect = new Dictionary<bool, int>();
             basicEffect.Add(true, 2);
@@ -70,37 +70,40 @@ public class CharacterAttacks : MonoBehaviour
         Dictionary<int, Dictionary<Dictionary<bool, int>, bool>> targetSpaces = new Dictionary<int, Dictionary<Dictionary<bool, int>, bool>>();
 
         int[] line = GetColumn(currentSpace, 2);
+        int[] sides = GetSides(currentSpace, 2);
 
-        for (int n = 0; n < 2; n++)
+        int[] spaces = new int[line.Length + sides.Length];
+
+        for (int n = 0; n < line.Length; n++)
+        {
+            spaces[n] = line[n];
+        }
+
+        for (int n = 0; n < sides.Length; n++)
+        {
+            spaces[n + line.Length] = sides[n];
+        }
+
+        bool first = true;
+
+        for (int n = 0; n < spaces.Length; n++)
         {
             Dictionary<bool, int> basicEffect = new Dictionary<bool, int>();
-            basicEffect.Add(true, 6 / (n + 1));
+            if (first)
+            {
+                basicEffect.Add(true, 4);
+            }
+            else
+            {
+                basicEffect.Add(true, 2);
+            }
 
             Dictionary<Dictionary<bool, int>, bool> effect = new Dictionary<Dictionary<bool, int>, bool>();
             effect.Add(basicEffect, false);
 
-            targetSpaces.Add(line[n], effect);
-        }
+            targetSpaces.Add(spaces[n], effect);
 
-        int[] sides = GetSides(currentSpace, 2);
-
-        for (int n = 0; n < 3; n++)
-        {
-            if (board.IsSpaceValid(sides[n]))
-            {
-                Space space = board.spaces[line[n]].GetComponent<Space>();
-
-                if (space.GetSpace())
-                {
-                    Dictionary<bool, int> basicEffect = new Dictionary<bool, int>();
-                    basicEffect.Add(true, 3);
-
-                    Dictionary<Dictionary<bool, int>, bool> effect = new Dictionary<Dictionary<bool, int>, bool>();
-                    effect.Add(basicEffect, false);
-
-                    targetSpaces.Add(line[n], effect);
-                }
-            }
+            first = false;
         }
 
         return targetSpaces;
@@ -116,7 +119,7 @@ public class CharacterAttacks : MonoBehaviour
 
         int[] line = GetColumn(currentSpace, 3);
 
-        for (int n = 0; n < 3; n++)
+        for (int n = 0; n < line.Length; n++)
         {
             if (board.IsSpaceValid(line[n]))
             {
@@ -159,39 +162,9 @@ public class CharacterAttacks : MonoBehaviour
     {
         Dictionary<int, Dictionary<Dictionary<bool, int>, bool>> targetSpaces = new Dictionary<int, Dictionary<Dictionary<bool, int>, bool>>();
 
-        int[] line = GetColumn(currentSpace, 1);
+        int[] line = GetColumn(currentSpace, 1); //Instead of getting a line, create a new function that grabs adjacent spaces and gets the center space too
 
-        for (int n = 0; n < 1; n++)
-        {
-            Dictionary<bool, int> basicEffect = new Dictionary<bool, int>();
-            basicEffect.Add(false, 3);
-
-            Dictionary<Dictionary<bool, int>, bool> effect = new Dictionary<Dictionary<bool, int>, bool>();
-            effect.Add(basicEffect, false);
-
-            targetSpaces.Add(line[n], effect);
-        }
-
-        int[] sides = GetSides(currentSpace, 2);
-
-        for (int n = 0; n < 3; n++)
-        {
-            if (board.IsSpaceValid(sides[n]))
-            {
-                Space space = board.spaces[line[n]].GetComponent<Space>();
-
-                if (space.GetSpace())
-                {
-                    Dictionary<bool, int> basicEffect = new Dictionary<bool, int>();
-                    basicEffect.Add(false, 2);
-
-                    Dictionary<Dictionary<bool, int>, bool> effect = new Dictionary<Dictionary<bool, int>, bool>();
-                    effect.Add(basicEffect, false);
-
-                    targetSpaces.Add(line[n], effect);
-                }
-            }
-        }
+        //for loop
 
         return targetSpaces;
     }
@@ -202,7 +175,6 @@ public class CharacterAttacks : MonoBehaviour
 
         Dictionary<bool, int> basicEffect = new Dictionary<bool, int>();
         basicEffect.Add(false, 4);
-        //basicEffect.Add(true, 6 / (n + 1));
 
         Dictionary<Dictionary<bool, int>, bool> effect = new Dictionary<Dictionary<bool, int>, bool>();
         effect.Add(basicEffect, false);
