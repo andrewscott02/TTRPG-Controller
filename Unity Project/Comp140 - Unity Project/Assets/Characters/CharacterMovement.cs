@@ -26,7 +26,7 @@ public class CharacterMovement : MonoBehaviour
     {
         character = GetComponent<CharacterAttacks>();
 
-        SetUpPosition();
+        IdlePosition();
     }
 
     #endregion
@@ -55,17 +55,6 @@ public class CharacterMovement : MonoBehaviour
         this.transform.position = setTransform.position;
 
         SetSpace(currentSpace, this.gameObject);
-    }
-
-    public void SetUpPosition()
-    {
-        Transform setTransform = teamBoard.GetSpace(idleSpace);
-        currentSpace = idleSpace + 6;
-        this.transform.position = setTransform.position;
-
-        Space spaceScript = board.spaces[currentSpace].GetComponent<Space>();
-
-        spaceScript.SetSpace(this.gameObject);
     }
 
     public void SetSpace(int space, GameObject newCharacter)

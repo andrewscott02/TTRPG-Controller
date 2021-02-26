@@ -9,7 +9,7 @@ public class FullBoard : MonoBehaviour
 
     public GameObject[] spaces;
 
-    private void Start()
+    private void Awake()
     {
         GameObject[] playerSpaces = playerBoard.spaces;
         GameObject[] enemySpaces = enemyBoard.spaces;
