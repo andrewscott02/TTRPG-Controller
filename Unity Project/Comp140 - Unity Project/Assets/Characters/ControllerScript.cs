@@ -111,7 +111,7 @@ public class ControllerScript : MonoBehaviour
 
             //select first character
 
-            currentCharacter = characters[0];
+            SelectCharacter(null, 0);
         }
 
         if (Input.GetKeyDown("w"))
@@ -120,7 +120,7 @@ public class ControllerScript : MonoBehaviour
 
             //select first character
 
-            currentCharacter = characters[1];
+            SelectCharacter(null, 1);
         }
 
         /*
@@ -206,7 +206,25 @@ public class ControllerScript : MonoBehaviour
 
     #endregion
 
-    #region Spell Selection
+    #region Character & Spell Selection
+
+    public void SelectCharacter(GameObject characterRef, int character)
+    {
+        if (characterRef != null)
+        {
+            foreach (var item in characters)
+            {
+                if (item == characterRef)
+                {
+                    currentCharacter = item;
+                }
+            }
+        }
+        else
+        {
+            currentCharacter = characters[character];
+        }
+    }
 
     public void SelectSpell(int spell)
     {

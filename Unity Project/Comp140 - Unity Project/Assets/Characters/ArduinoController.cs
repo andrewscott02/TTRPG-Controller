@@ -56,11 +56,10 @@ public class ArduinoController : MonoBehaviour
         foreach (var item in pins)
         {
             //add another if statement to check if another figure is on the space, if true, do not change the current space, skip to i++ and return
+            Space spaceScript = boardRef.spaces[i + 6].GetComponent<Space>();
 
             if (item == true)
             {
-                Space spaceScript = boardRef.spaces[i + 6].GetComponent<Space>();
-
                 if (spaceScript.GetSpace())
                 {
                     space = i;
@@ -74,6 +73,15 @@ public class ArduinoController : MonoBehaviour
                         space = i;
                         placed = true;
                     }
+                }
+            }
+            else
+            {
+                //pick up piece logic here
+                if (!spaceScript.GetSpace())
+                {
+                    controller.SelectCharacter(spaceScript.character, 0);
+                    controller.IdlePosition();
                 }
             }
             i++;
