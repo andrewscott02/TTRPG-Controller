@@ -82,6 +82,7 @@ public class ArduinoController : MonoBehaviour
                 {
                     controller.SelectCharacter(spaceScript.character, 0);
                     controller.IdlePosition();
+                    placed = false;
                 }
             }
             i++;
