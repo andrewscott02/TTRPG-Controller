@@ -22,11 +22,6 @@ public class ControllerScript : MonoBehaviour
 
     #endregion
 
-    public GameObject CheckCharacter()
-    {
-        return currentCharacter;
-    }
-
     #region Inputs
 
     // Update is called once per frame
@@ -160,6 +155,11 @@ public class ControllerScript : MonoBehaviour
     #endregion
 
     #region Actions
+
+    public GameObject CheckCharacter()
+    {
+        return currentCharacter;
+    }
 
     void Highlight()
     {

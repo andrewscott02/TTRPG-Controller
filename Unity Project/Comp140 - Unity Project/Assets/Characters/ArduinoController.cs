@@ -5,6 +5,10 @@ using Uduino;
 
 public class ArduinoController : MonoBehaviour
 {
+    #region Setup
+
+    #region Variables
+
     public FullBoard boardRef;
 
     private bool[] pins = new bool[6];
@@ -13,13 +17,11 @@ public class ArduinoController : MonoBehaviour
 
     [Range(0, 1023)]
 
-    public float calMin = 0f;
-
-    [Range(0, 1023)]
-
-    public float calMax = 1023f;
+    public float resistorThreshold = 0f;
 
     bool endTurn = false;
+
+    #endregion
 
     // Start is called before the first frame update
     void Start()
@@ -38,6 +40,10 @@ public class ArduinoController : MonoBehaviour
         //UduinoManager.Instance.pinMode(2, PinMode.Input_pullup);
     }
 
+    #endregion
+
+    #region Input
+
     // Update is called once per frame
     void Update()
     {
@@ -55,19 +61,21 @@ public class ArduinoController : MonoBehaviour
         int i = 0;
         foreach (var item in pins)
         {
-            //add another if statement to check if another figure is on the space, if true, do not change the current space, skip to i++ and return
             Space spaceScript = boardRef.spaces[i + 6].GetComponent<Space>();
 
             if (item == true)
             {
+                //The pin has sensed that there is a figure placed on the sensor, check if that character is the character that we intend to place
+
                 if (spaceScript.GetSpace())
                 {
+                    //The space was empty, move the current character to the space
                     space = i;
                     placed = true;
                 }
                 else
                 {
-                    //check that character is not the current character
+                    //There was a character on the space, check that character is the current character
                     if (spaceScript.character == controller.CheckCharacter())
                     {
                         space = i;
@@ -77,9 +85,10 @@ public class ArduinoController : MonoBehaviour
             }
             else
             {
-                //pick up piece logic here
+                //The pin has sensed that there is not a figure placed on the sensor, check if the pin had a character on the space
                 if (!spaceScript.GetSpace())
                 {
+                    //Changes the current character to the removed character
                     controller.SelectCharacter(spaceScript.character, 0);
                     controller.IdlePosition();
                     placed = false;
@@ -113,18 +122,24 @@ public class ArduinoController : MonoBehaviour
         //controller.EndTurn(endTurn);
     }
 
+    #endregion
+
+    #region Movement
+
     private void Move(int space)
     {
         controller.Move(space);
     }
 
+    #endregion
+
+    #region Helper Functions
+
     bool GetIsPlacedAnalog(AnalogPin pinToRead)
     {
         int analogValue = UduinoManager.Instance.analogRead(pinToRead);
 
-        float direction = MapIntToFloat(analogValue, calMin, calMax, -1f, 1f);
-
-        if (direction > 0)
+        if (analogValue > resistorThreshold)
         {
             return false;
         }
@@ -134,10 +149,5 @@ public class ArduinoController : MonoBehaviour
         }
     }
 
-    float MapIntToFloat(int inputValue, float fromMin, float fromMax, float toMin, float toMax)
-    {
-        float i = ((((float)inputValue - fromMin) / (fromMax - fromMin)) * (toMax - toMin) + toMin);
-        i = Mathf.Clamp(i, toMin, toMax);
-        return i;
-    }
+    #endregion
 }

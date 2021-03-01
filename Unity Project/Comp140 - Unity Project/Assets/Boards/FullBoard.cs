@@ -4,10 +4,16 @@ using UnityEngine;
 
 public class FullBoard : MonoBehaviour
 {
+    #region Setup
+
+    #region Variables
+
     public Board playerBoard;
     public Board enemyBoard;
 
     public GameObject[] spaces;
+
+    #endregion
 
     private void Awake()
     {
@@ -27,6 +33,10 @@ public class FullBoard : MonoBehaviour
         }
     }
 
+    #endregion
+
+    #region Space Checks
+
     public Transform GetSpace(int space)
     {
         if (IsSpaceValid(space))
@@ -35,6 +45,15 @@ public class FullBoard : MonoBehaviour
         }
         return null;
     }
+
+    public bool IsSpaceValid(int space)
+    {
+        return space >= 0 && space < (spaces.Length - 2);
+    }
+
+    #endregion
+
+    #region Highlight Spaces
 
     public void HighlightSpace(int space, Color colour)
     {
@@ -54,8 +73,5 @@ public class FullBoard : MonoBehaviour
         }
     }
 
-    public bool IsSpaceValid(int space)
-    {
-        return space >= 0 && space < (spaces.Length - 2);
-    }
+    #endregion
 }

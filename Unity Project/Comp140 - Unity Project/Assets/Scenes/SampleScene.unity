@@ -153,8 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boardRef: {fileID: 373684432}
-  calMin: 0
-  calMax: 400
+  resistorThreshold: 200
 --- !u!114 &54842460
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -553,8 +552,9 @@ MonoBehaviour:
     keys: []
     values: 
   presentExtentionsMap:
-    keys: []
-    values: 
+    keys:
+    - UduinoDevice_DesktopSerial
+    values: 01
   ManagerState: 0
   debugLevel: 0
   baudRate: 9600
