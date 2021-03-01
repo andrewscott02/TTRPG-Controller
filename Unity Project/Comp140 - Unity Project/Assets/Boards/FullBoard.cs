@@ -55,12 +55,11 @@ public class FullBoard : MonoBehaviour
 
     #region Highlight Spaces
 
-    public void HighlightSpace(int space, Color colour)
+    public void HighlightSpace(int space, bool damage, bool heal)
     {
         if (IsSpaceValid(space))
         {
-            Material mat = spaces[space].GetComponentInChildren<MeshRenderer>().material;
-            mat.SetColor("_Color", colour);
+            spaces[space].GetComponent<Space>().SetHighlight(damage, heal);
         }
     }
 
@@ -68,8 +67,11 @@ public class FullBoard : MonoBehaviour
     {
         foreach (var space in spaces)
         {
-            Material mat = space.GetComponentInChildren<MeshRenderer>().material;
-            mat.SetColor("_Color", Color.white);
+            Space spaceScript = space.GetComponent<Space>();
+            spaceScript.damage = false;
+            spaceScript.heal = false;
+
+            spaceScript.HighlightColour(Color.white);
         }
     }
 

@@ -65,23 +65,6 @@ public class CharacterMovement : MonoBehaviour
         spaceScript.SetSpace(newCharacter);
     }
 
-    public void Highlight()
-    {
-        Dictionary<int, bool> spacesDictionary = GetAbilitySpaces();
-
-        foreach (var item in spacesDictionary)
-        {
-            if (item.Value)
-            {
-                board.HighlightSpace(item.Key, Color.red);
-            }
-            else
-            {
-                board.HighlightSpace(item.Key, Color.green);
-            }
-        }
-    }
-
     #endregion
 
     #region Attack
@@ -109,7 +92,22 @@ public class CharacterMovement : MonoBehaviour
         }
     }
 
-    #endregion
+    public void Highlight()
+    {
+        Dictionary<int, bool> spacesDictionary = GetAbilitySpaces();
+
+        foreach (var item in spacesDictionary)
+        {
+            if (item.Value)
+            {
+                board.HighlightSpace(item.Key, true, false);
+            }
+            else
+            {
+                board.HighlightSpace(item.Key, false, true);
+            }
+        }
+    }
 
     public void SelectAbility(int ability)
     {
@@ -119,6 +117,8 @@ public class CharacterMovement : MonoBehaviour
 
         Invoke("Highlight", 0.15f);
     }
+
+    #endregion
 
     #endregion
 
