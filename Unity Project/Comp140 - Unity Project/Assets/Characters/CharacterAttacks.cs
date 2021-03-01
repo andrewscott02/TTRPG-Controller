@@ -45,12 +45,13 @@ public class CharacterAttacks : MonoBehaviour
 
         for (int n = 0; n < line.Length; n++)
         {
-            TargetSpace targetSpace = new TargetSpace();
-
-            targetSpace.space = line[n];
-            targetSpace.damage = true;
-            targetSpace.value = 0.4f;
-            targetSpace.effect = false;
+            TargetSpace targetSpace = new TargetSpace
+            {
+                space = line[n],
+                damage = true,
+                value = 0.4f,
+                effect = false
+            };
 
             targetArea[n] = targetSpace;
         }
@@ -65,12 +66,13 @@ public class CharacterAttacks : MonoBehaviour
 
         for (int n = 0; n < line.Length; n++)
         {
-            TargetSpace targetSpace = new TargetSpace();
-
-            targetSpace.space = line[n];
-            targetSpace.damage = true;
-            targetSpace.value = 0.2f;
-            targetSpace.effect = false;
+            TargetSpace targetSpace = new TargetSpace
+            {
+                space = line[n],
+                damage = true,
+                value = 0.2f,
+                effect = false
+            };
 
             targetArea[n] = targetSpace;
         }
@@ -101,7 +103,12 @@ public class CharacterAttacks : MonoBehaviour
 
         for (int n = 0; n < spaces.Length; n++)
         {
-            TargetSpace targetSpace = new TargetSpace();
+            TargetSpace targetSpace = new TargetSpace
+            {
+                space = spaces[n],
+                damage = true,
+                effect = false
+            };
 
             if (first)
             {
@@ -111,10 +118,6 @@ public class CharacterAttacks : MonoBehaviour
             {
                 targetSpace.value = 0.2f;
             }
-
-            targetSpace.space = spaces[n];
-            targetSpace.damage = true;
-            targetSpace.effect = false;
 
             targetArea[n] = targetSpace;
         }
@@ -151,12 +154,13 @@ public class CharacterAttacks : MonoBehaviour
 
         for (int n = 0; n < targetSpaces.Count; n++)
         {
-            TargetSpace targetSpace = new TargetSpace();
-
-            targetSpace.space = targetSpaces[n];
-            targetSpace.damage = true;
-            targetSpace.value = 0.2f;
-            targetSpace.effect = true;
+            TargetSpace targetSpace = new TargetSpace
+            {
+                space = targetSpaces[n],
+                damage = true,
+                value = 0.2f,
+                effect = true
+            };
 
             targetArea[n] = targetSpace;
         }
@@ -175,12 +179,13 @@ public class CharacterAttacks : MonoBehaviour
 
         for (int n = 0; n < line.Length; n++)
         {
-            TargetSpace targetSpace = new TargetSpace();
-
-            targetSpace.space = line[n];
-            targetSpace.damage = false;
-            targetSpace.value = 0.2f;
-            targetSpace.effect = false;
+            TargetSpace targetSpace = new TargetSpace
+            {
+                space = line[n],
+                damage = false,
+                value = 0.2f,
+                effect = false
+            };
 
             targetArea[n] = targetSpace;
         }
@@ -192,12 +197,13 @@ public class CharacterAttacks : MonoBehaviour
     {
         TargetSpace[] targetArea = new TargetSpace[1];
 
-        TargetSpace targetSpace = new TargetSpace();
-
-        targetSpace.space = currentSpace;
-        targetSpace.damage = false;
-        targetSpace.value = 0.4f;
-        targetSpace.effect = false;
+        TargetSpace targetSpace = new TargetSpace
+        {
+            space = currentSpace,
+            damage = false,
+            value = 0.4f,
+            effect = false
+        };
 
         targetArea[0] = targetSpace;
 

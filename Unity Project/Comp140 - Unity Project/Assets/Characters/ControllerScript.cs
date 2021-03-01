@@ -15,11 +15,6 @@ public class ControllerScript : MonoBehaviour
 
     #endregion
 
-    private void Start()
-    {
-        //currentCharacter = characters[0];
-    }
-
     #endregion
 
     #region Inputs
