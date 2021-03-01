@@ -12,6 +12,8 @@ public class TargetSpace
 
 public class CharacterAttacks : MonoBehaviour
 {
+    #region Setup
+
     #region Variables
 
     private FullBoard board;
@@ -30,6 +32,8 @@ public class CharacterAttacks : MonoBehaviour
         board = reference.GetComponent<FullBoard>();
     }
 
+    #endregion
+
     #region Abilities
 
     #region Damage
@@ -41,10 +45,14 @@ public class CharacterAttacks : MonoBehaviour
 
         for (int n = 0; n < line.Length; n++)
         {
-            targetArea[n].space = line[n];
-            targetArea[n].damage = true;
-            targetArea[n].value = 0.4f;
-            targetArea[n].effect = false;
+            TargetSpace targetSpace = new TargetSpace();
+
+            targetSpace.space = line[n];
+            targetSpace.damage = true;
+            targetSpace.value = 0.4f;
+            targetSpace.effect = false;
+
+            targetArea[n] = targetSpace;
         }
 
         return targetArea;
@@ -57,10 +65,14 @@ public class CharacterAttacks : MonoBehaviour
 
         for (int n = 0; n < line.Length; n++)
         {
-            targetArea[n].space = line[n];
-            targetArea[n].damage = true;
-            targetArea[n].value = 0.2f;
-            targetArea[n].effect = false;
+            TargetSpace targetSpace = new TargetSpace();
+
+            targetSpace.space = line[n];
+            targetSpace.damage = true;
+            targetSpace.value = 0.2f;
+            targetSpace.effect = false;
+
+            targetArea[n] = targetSpace;
         }
 
         return targetArea;
@@ -89,18 +101,22 @@ public class CharacterAttacks : MonoBehaviour
 
         for (int n = 0; n < spaces.Length; n++)
         {
+            TargetSpace targetSpace = new TargetSpace();
+
             if (first)
             {
-                targetArea[n].value = 0.4f;
+                targetSpace.value = 0.4f;
             }
             else
             {
-                targetArea[n].value = 0.2f;
+                targetSpace.value = 0.2f;
             }
 
-            targetArea[n].space = line[n];
-            targetArea[n].damage = true;
-            targetArea[n].effect = false;
+            targetSpace.space = spaces[n];
+            targetSpace.damage = true;
+            targetSpace.effect = false;
+
+            targetArea[n] = targetSpace;
         }
 
         return targetArea;
@@ -133,12 +149,16 @@ public class CharacterAttacks : MonoBehaviour
 
         TargetSpace[] targetArea = new TargetSpace[targetSpaces.Count];
 
-        for (int n = 0; n < line.Length; n++)
+        for (int n = 0; n < targetSpaces.Count; n++)
         {
-            targetArea[n].space = targetSpaces[n];
-            targetArea[n].damage = true;
-            targetArea[n].value = 0.2f;
-            targetArea[n].effect = false;
+            TargetSpace targetSpace = new TargetSpace();
+
+            targetSpace.space = targetSpaces[n];
+            targetSpace.damage = true;
+            targetSpace.value = 0.2f;
+            targetSpace.effect = true;
+
+            targetArea[n] = targetSpace;
         }
 
         return targetArea;
@@ -155,10 +175,14 @@ public class CharacterAttacks : MonoBehaviour
 
         for (int n = 0; n < line.Length; n++)
         {
-            targetArea[n].space = line[n];
-            targetArea[n].damage = false;
-            targetArea[n].value = 0.2f;
-            targetArea[n].effect = false;
+            TargetSpace targetSpace = new TargetSpace();
+
+            targetSpace.space = line[n];
+            targetSpace.damage = false;
+            targetSpace.value = 0.2f;
+            targetSpace.effect = false;
+
+            targetArea[n] = targetSpace;
         }
 
         return targetArea;
@@ -168,10 +192,14 @@ public class CharacterAttacks : MonoBehaviour
     {
         TargetSpace[] targetArea = new TargetSpace[1];
 
-        targetArea[0].space = currentSpace;
-        targetArea[0].damage = true;
-        targetArea[0].value = 0.5f;
-        targetArea[0].effect = false;
+        TargetSpace targetSpace = new TargetSpace();
+
+        targetSpace.space = currentSpace;
+        targetSpace.damage = false;
+        targetSpace.value = 0.4f;
+        targetSpace.effect = false;
+
+        targetArea[0] = targetSpace;
 
         return targetArea;
     }

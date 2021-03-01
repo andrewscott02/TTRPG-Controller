@@ -66,11 +66,18 @@ public class CharacterMovement : MonoBehaviour
 
     public void Highlight()
     {
-        int[] attackSpaces = GetAbilitySpaces();
+        Dictionary<int, bool> spacesDictionary = GetAbilitySpaces();
 
-        for (int n = 0; n < attackSpaces.Length; n++)
+        foreach (var item in spacesDictionary)
         {
-            board.HighlightSpace(attackSpaces[n], Color.red);
+            if (item.Value)
+            {
+                board.HighlightSpace(item.Key, Color.red);
+            }
+            else
+            {
+                board.HighlightSpace(item.Key, Color.green);
+            }
         }
     }
 
@@ -80,19 +87,23 @@ public class CharacterMovement : MonoBehaviour
 
     public void Attack()
     {
-        int[] attackSpaces = GetAbilitySpaces();
-        Transform[] attackTransform = new Transform[attackSpaces.Length];
+        Dictionary<int, bool> spacesDictionary = GetAbilitySpaces();
 
-        for (int n = 0; n < attackSpaces.Length; n++)
+        foreach (var item in spacesDictionary)
         {
-            attackTransform[n] = board.GetSpace(attackSpaces[n]);
-        }
+            Transform attackTransform = board.GetSpace(item.Key);
 
-        foreach (var transform in attackTransform)
-        {
-            if (transform != null)
+            if (item.Value)
             {
+                //attack
+                attackTransform = board.GetSpace(item.Key);
                 Instantiate(attackEffect, transform);
+            }
+            else
+            {
+                //heal
+                attackTransform = board.GetSpace(item.Key);
+                //Instantiate(attackEffect, transform);
             }
         }
     }
@@ -132,47 +143,19 @@ public class CharacterMovement : MonoBehaviour
         return targetSpaces;
     }
 
-    int[] GetAbilitySpaces()
+    Dictionary<int, bool> GetAbilitySpaces()
     {
-        Dictionary<int, Dictionary<Dictionary<bool, int>, bool>> targetSpaces = new Dictionary<int, Dictionary<Dictionary<bool, int>, bool>>();
-        targetSpaces = GetAbility();
-
-        int[] spacesArray = new int[targetSpaces.Keys.Count];
-        int n = 0;
-
-        foreach (var space in targetSpaces)
-        {
-            int spaceNum = space.Key;
-
-            spacesArray[n] = spaceNum;
-
-            n++;
-        }
-
-        return spacesArray;
-    }
-
-    Dictionary<int, bool> GetAbilitySpacesDictionary()
-    {
-        TargetSpace[] targetSpaces = new TargetSpace[10];
-
-        targetSpaces = GetAbility();
+        TargetSpace[] targetSpaces = GetAbility();
 
         Dictionary<int, bool> spacesDictionary = new Dictionary<int, bool>();
         int n = 0;
 
         foreach (var space in targetSpaces)
         {
-            int spaceNum = space.Key;
-            bool damage = spaceEffect.Key;
+            int spaceNum = space.space;
+            bool damage = space.damage;
 
-            spaceDictionary = space.Value;
-
-            spaceEffect = spaceDictionary.Key;
-
-            bool damage = spaceEffect.Key;
-
-            spacesDictionary.Add(spaceNum, false);
+            spacesDictionary.Add(spaceNum, damage);
 
             n++;
         }
