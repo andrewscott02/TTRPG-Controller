@@ -112,9 +112,9 @@ public class CharacterMovement : MonoBehaviour
 
     #region Helper Functions
 
-    Dictionary<int, Dictionary<Dictionary<bool, int>, bool>> GetAbility()
+    TargetSpace[] GetAbility()
     {
-        Dictionary<int, Dictionary<Dictionary<bool, int>, bool>> targetSpaces = new Dictionary<int, Dictionary<Dictionary<bool, int>, bool>>();
+        TargetSpace[] targetSpaces = new TargetSpace[10];
 
         if (abilityNum == 1)
         {
@@ -150,6 +150,34 @@ public class CharacterMovement : MonoBehaviour
         }
 
         return spacesArray;
+    }
+
+    Dictionary<int, bool> GetAbilitySpacesDictionary()
+    {
+        TargetSpace[] targetSpaces = new TargetSpace[10];
+
+        targetSpaces = GetAbility();
+
+        Dictionary<int, bool> spacesDictionary = new Dictionary<int, bool>();
+        int n = 0;
+
+        foreach (var space in targetSpaces)
+        {
+            int spaceNum = space.Key;
+            bool damage = spaceEffect.Key;
+
+            spaceDictionary = space.Value;
+
+            spaceEffect = spaceDictionary.Key;
+
+            bool damage = spaceEffect.Key;
+
+            spacesDictionary.Add(spaceNum, false);
+
+            n++;
+        }
+
+        return spacesDictionary;
     }
 
     #endregion

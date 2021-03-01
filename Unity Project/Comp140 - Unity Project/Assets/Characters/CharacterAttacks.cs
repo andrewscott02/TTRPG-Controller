@@ -2,13 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public class TargetSpace
+{
+    public int space;
+    public bool damage;
+    public float value;
+    public bool effect;
+}
+
 public class CharacterAttacks : MonoBehaviour
 {
     #region Variables
 
     private FullBoard board;
 
-    public delegate Dictionary<int, Dictionary<Dictionary<bool, int>, bool>> Ability(int currentSpace);
+    public delegate TargetSpace[] Ability(int currentSpace);
 
     public Ability ability1;
     public Ability ability2;
@@ -26,49 +34,40 @@ public class CharacterAttacks : MonoBehaviour
 
     #region Damage
 
-    public Dictionary<int, Dictionary<Dictionary<bool, int>, bool>> Disintegration(int currentSpace)
+    public TargetSpace[] Disintegration(int currentSpace)
     {
-        Dictionary<int, Dictionary<Dictionary<bool, int>, bool>> targetSpaces = new Dictionary<int, Dictionary<Dictionary<bool, int>, bool>>();
-
         int[] line = GetColumn(currentSpace, 3);
+        TargetSpace[] targetArea = new TargetSpace[line.Length];
 
         for (int n = 0; n < line.Length; n++)
         {
-            Dictionary<bool, int> basicEffect = new Dictionary<bool, int>();
-            basicEffect.Add(true, 4);
-            //basicEffect.Add(true, 6 / (n + 1));
-
-            Dictionary<Dictionary<bool, int>, bool> effect = new Dictionary<Dictionary<bool, int>, bool>();
-            effect.Add(basicEffect, false);
-            
-            targetSpaces.Add(line[n], effect);
+            targetArea[n].space = line[n];
+            targetArea[n].damage = true;
+            targetArea[n].value = 0.4f;
+            targetArea[n].effect = false;
         }
-        return targetSpaces;
+
+        return targetArea;
     }
 
-    public Dictionary<int, Dictionary<Dictionary<bool, int>, bool>> WallOfFire(int currentSpace)
+    public TargetSpace[] WallOfFire(int currentSpace)
     {
-        Dictionary<int, Dictionary<Dictionary<bool, int>, bool>> targetSpaces = new Dictionary<int, Dictionary<Dictionary<bool, int>, bool>>();
-
         int[] line = GetRow(currentSpace, 2);
+        TargetSpace[] targetArea = new TargetSpace[line.Length];
 
         for (int n = 0; n < line.Length; n++)
         {
-            Dictionary<bool, int> basicEffect = new Dictionary<bool, int>();
-            basicEffect.Add(true, 2);
-
-            Dictionary<Dictionary<bool, int>, bool> effect = new Dictionary<Dictionary<bool, int>, bool>();
-            effect.Add(basicEffect, false);
-
-            targetSpaces.Add(line[n], effect);
+            targetArea[n].space = line[n];
+            targetArea[n].damage = true;
+            targetArea[n].value = 0.2f;
+            targetArea[n].effect = false;
         }
-        return targetSpaces;
+
+        return targetArea;
     }
 
-    public Dictionary<int, Dictionary<Dictionary<bool, int>, bool>> ConeOfCold(int currentSpace)
+    public TargetSpace[] ConeOfCold(int currentSpace)
     {
-        Dictionary<int, Dictionary<Dictionary<bool, int>, bool>> targetSpaces = new Dictionary<int, Dictionary<Dictionary<bool, int>, bool>>();
-
         int[] line = GetColumn(currentSpace, 2);
         int[] sides = GetSides(currentSpace, 2);
 
@@ -84,40 +83,38 @@ public class CharacterAttacks : MonoBehaviour
             spaces[n + line.Length] = sides[n];
         }
 
+        TargetSpace[] targetArea = new TargetSpace[spaces.Length];
+
         bool first = true;
 
         for (int n = 0; n < spaces.Length; n++)
         {
-            Dictionary<bool, int> basicEffect = new Dictionary<bool, int>();
             if (first)
             {
-                basicEffect.Add(true, 4);
+                targetArea[n].value = 0.4f;
             }
             else
             {
-                basicEffect.Add(true, 2);
+                targetArea[n].value = 0.2f;
             }
 
-            Dictionary<Dictionary<bool, int>, bool> effect = new Dictionary<Dictionary<bool, int>, bool>();
-            effect.Add(basicEffect, false);
-
-            targetSpaces.Add(spaces[n], effect);
-
-            first = false;
+            targetArea[n].space = line[n];
+            targetArea[n].damage = true;
+            targetArea[n].effect = false;
         }
 
-        return targetSpaces;
+        return targetArea;
     }
 
     #endregion
 
     #region Control
 
-    public Dictionary<int, Dictionary<Dictionary<bool, int>, bool>> FreezingGrasp(int currentSpace)
+    public TargetSpace[] FreezingGrasp(int currentSpace)
     {
-        Dictionary<int, Dictionary<Dictionary<bool, int>, bool>> targetSpaces = new Dictionary<int, Dictionary<Dictionary<bool, int>, bool>>();
-
         int[] line = GetColumn(currentSpace, 3);
+
+        List<int> targetSpaces = new List<int>();
 
         for (int n = 0; n < line.Length; n++)
         {
@@ -125,72 +122,58 @@ public class CharacterAttacks : MonoBehaviour
             {
                 Space space = board.spaces[line[n]].GetComponent<Space>();
 
-                if (space.GetSpace())
+                targetSpaces.Add(line[n]);
+
+                if (!space.GetSpace())
                 {
-                    Dictionary<bool, int> basicEffect = new Dictionary<bool, int>();
-                    basicEffect.Add(true, 4);
-                    //basicEffect.Add(true, 6 / (n + 1));
-
-                    Dictionary<Dictionary<bool, int>, bool> effect = new Dictionary<Dictionary<bool, int>, bool>();
-                    effect.Add(basicEffect, true);
-
-                    targetSpaces.Add(line[n], effect);
-                }
-                else
-                {
-                    Dictionary<bool, int> basicEffect = new Dictionary<bool, int>();
-                    basicEffect.Add(true, 4);
-                    //basicEffect.Add(true, 6 / (n + 1));
-
-                    Dictionary<Dictionary<bool, int>, bool> effect = new Dictionary<Dictionary<bool, int>, bool>();
-                    effect.Add(basicEffect, true);
-
-                    targetSpaces.Add(line[n], effect);
-
-                    return targetSpaces;
+                    break;
                 }
             }
         }
-        return targetSpaces;
+
+        TargetSpace[] targetArea = new TargetSpace[targetSpaces.Count];
+
+        for (int n = 0; n < line.Length; n++)
+        {
+            targetArea[n].space = targetSpaces[n];
+            targetArea[n].damage = true;
+            targetArea[n].value = 0.2f;
+            targetArea[n].effect = false;
+        }
+
+        return targetArea;
     }
 
     #endregion
 
     #region Healing
 
-    public Dictionary<int, Dictionary<Dictionary<bool, int>, bool>> HealingBurst(int currentSpace)
+    public TargetSpace[] HealingBurst(int currentSpace)
     {
-        Dictionary<int, Dictionary<Dictionary<bool, int>, bool>> targetSpaces = new Dictionary<int, Dictionary<Dictionary<bool, int>, bool>>();
+        int[] line = GetRow(currentSpace, 0);
+        TargetSpace[] targetArea = new TargetSpace[line.Length];
 
-        int[] radius = GetRow(currentSpace, 0);
-
-        for (int n = 0; n < radius.Length; n++)
+        for (int n = 0; n < line.Length; n++)
         {
-            Dictionary<bool, int> basicEffect = new Dictionary<bool, int>();
-            basicEffect.Add(false, 2);
-
-            Dictionary<Dictionary<bool, int>, bool> effect = new Dictionary<Dictionary<bool, int>, bool>();
-            effect.Add(basicEffect, false);
-
-            targetSpaces.Add(radius[n], effect);
+            targetArea[n].space = line[n];
+            targetArea[n].damage = false;
+            targetArea[n].value = 0.2f;
+            targetArea[n].effect = false;
         }
 
-        return targetSpaces;
+        return targetArea;
     }
 
-    public Dictionary<int, Dictionary<Dictionary<bool, int>, bool>> FrozenArmour(int currentSpace)
+    public TargetSpace[] FrozenArmour(int currentSpace)
     {
-        Dictionary<int, Dictionary<Dictionary<bool, int>, bool>> targetSpaces = new Dictionary<int, Dictionary<Dictionary<bool, int>, bool>>();
+        TargetSpace[] targetArea = new TargetSpace[1];
 
-        Dictionary<bool, int> basicEffect = new Dictionary<bool, int>();
-        basicEffect.Add(false, 4);
+        targetArea[0].space = currentSpace;
+        targetArea[0].damage = true;
+        targetArea[0].value = 0.5f;
+        targetArea[0].effect = false;
 
-        Dictionary<Dictionary<bool, int>, bool> effect = new Dictionary<Dictionary<bool, int>, bool>();
-        effect.Add(basicEffect, false);
-
-        targetSpaces.Add(currentSpace, effect);
-
-        return targetSpaces;
+        return targetArea;
     }
 
     #endregion
