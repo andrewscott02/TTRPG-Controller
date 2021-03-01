@@ -47,7 +47,10 @@ MonoBehaviour:
   board: {fileID: 0}
   teamBoard: {fileID: 0}
   idleSpace: 0
-  attackEffect: {fileID: 0}
+  attackEffect: {fileID: 8700936205326785216, guid: 64bf009b3ff28fc44a7a4e5955097016,
+    type: 3}
+  healEffect: {fileID: 8700936205326785216, guid: 416c4f49ca4909b428b0da02f8c1f32c,
+    type: 3}
 --- !u!1 &8111890614153760541
 GameObject:
   m_ObjectHideFlags: 0
