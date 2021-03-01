@@ -45,6 +45,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3926601687b9ab64eb2a9f4216651ddb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  character: {fileID: 0}
+  idle: 0
+  damage: 0
+  heal: 0
+  attackEffect: {fileID: 8700936205326785216, guid: 64bf009b3ff28fc44a7a4e5955097016,
+    type: 3}
+  healEffect: {fileID: 8700936205326785216, guid: 416c4f49ca4909b428b0da02f8c1f32c,
+    type: 3}
 --- !u!1 &7950998948063128792
 GameObject:
   m_ObjectHideFlags: 0

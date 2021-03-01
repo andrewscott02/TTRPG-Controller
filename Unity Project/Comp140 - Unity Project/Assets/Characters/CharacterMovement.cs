@@ -15,9 +15,6 @@ public class CharacterMovement : MonoBehaviour
     [Range(6, 8)]
     public int idleSpace;
 
-    public Object attackEffect;
-    public Object healEffect;
-
     private CharacterAttacks character;
     int abilityNum = 1;
 
@@ -71,23 +68,25 @@ public class CharacterMovement : MonoBehaviour
 
     public void Attack()
     {
-        Dictionary<int, bool> spacesDictionary = GetAbilitySpaces();
+        TargetSpace[] targetSpaces = GetAbility();
 
-        foreach (var item in spacesDictionary)
+        foreach (var item in targetSpaces)
         {
-            Transform abilityTransform = board.GetSpace(item.Key);
-
-            if (item.Value)
+            if (item.damage)
             {
                 //attack
-                abilityTransform = board.GetSpace(item.Key);
-                Instantiate(attackEffect, abilityTransform);
+                board.Attack(item.space, item.value);
             }
             else
             {
                 //heal
-                abilityTransform = board.GetSpace(item.Key);
-                Instantiate(healEffect, abilityTransform);
+                board.Heal(item.space, item.value);
+            }
+
+            if (item.effect)
+            {
+                //stun
+                board.Stun(item.space);
             }
         }
     }

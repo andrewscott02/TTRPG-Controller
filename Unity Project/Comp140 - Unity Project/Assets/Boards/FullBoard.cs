@@ -59,7 +59,8 @@ public class FullBoard : MonoBehaviour
     {
         if (IsSpaceValid(space))
         {
-            spaces[space].GetComponent<Space>().SetHighlight(damage, heal);
+            Space spaceScript = spaces[space].GetComponent<Space>();
+            spaceScript.SetHighlight(damage, heal);
         }
     }
 
@@ -76,4 +77,31 @@ public class FullBoard : MonoBehaviour
     }
 
     #endregion
+
+    public void Attack(int space, float damage)
+    {
+        if (IsSpaceValid(space))
+        {
+            Space spaceScript = spaces[space].GetComponent<Space>();
+            spaceScript.Attack(damage);
+        }
+    }
+
+    public void Heal(int space, float heal)
+    {
+        if (IsSpaceValid(space))
+        {
+            Space spaceScript = spaces[space].GetComponent<Space>();
+            spaceScript.Heal(heal);
+        }
+    }
+
+    public void Stun(int space)
+    {
+        if (IsSpaceValid(space))
+        {
+            Space spaceScript = spaces[space].GetComponent<Space>();
+            spaceScript.Stun();
+        }
+    }
 }
