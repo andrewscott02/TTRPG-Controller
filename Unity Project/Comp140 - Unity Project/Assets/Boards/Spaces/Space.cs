@@ -9,6 +9,8 @@ public class Space : MonoBehaviour
     #region Variables
 
     public GameObject character;
+    private Health health;
+
     public bool idle = false;
 
     private FullBoard board;
@@ -24,6 +26,11 @@ public class Space : MonoBehaviour
     private void Start()
     {
         board = GameObject.Find("Board").GetComponent<FullBoard>();
+
+        if (character != null)
+        {
+            health = character.GetComponent<Health>();
+        }
     }
 
     #endregion
@@ -41,6 +48,11 @@ public class Space : MonoBehaviour
     public void SetSpace(GameObject newCharacter)
     {
         character = newCharacter;
+
+        if (character != null)
+        {
+            health = character.GetComponent<Health>();
+        }
     }
 
     #endregion
@@ -90,13 +102,25 @@ public class Space : MonoBehaviour
     public void Attack(float damage)
     {
         Instantiate(attackEffect, transform);
-        Debug.Log("Take " + damage + " damage");
+
+        if (character != null)
+        {
+            health = character.GetComponent<Health>();
+
+            health.TakeDamage(damage);
+        }
     }
 
     public void Heal(float heal)
     {
         Instantiate(healEffect, transform);
-        Debug.Log("Heal " + heal + " health");
+
+        if (character != null)
+        {
+            health = character.GetComponent<Health>();
+
+            health.Heal(heal);
+        }
     }
 
     public void Stun()

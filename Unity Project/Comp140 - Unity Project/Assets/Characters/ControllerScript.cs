@@ -154,10 +154,13 @@ public class ControllerScript : MonoBehaviour
 
             if (spaceScript.character != null)
             {
-                CharacterMovement moveScript = spaceScript.character.GetComponent<CharacterMovement>();
-                if (!spaceScript.idle)
+                if (spaceScript.character.GetComponent<CharacterMovement>() != null)
                 {
-                    moveScript.Highlight();
+                    CharacterMovement moveScript = spaceScript.character.GetComponent<CharacterMovement>();
+                    if (!spaceScript.idle)
+                    {
+                        moveScript.Highlight();
+                    }
                 }
             }
         }
