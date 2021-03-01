@@ -56,6 +56,6 @@ public class FullBoard : MonoBehaviour
 
     public bool IsSpaceValid(int space)
     {
-        return space >= 0 && space < spaces.Length;
+        return space >= 0 && space < (spaces.Length - 2);
     }
 }
