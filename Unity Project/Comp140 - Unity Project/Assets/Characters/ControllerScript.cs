@@ -102,8 +102,6 @@ public class ControllerScript : MonoBehaviour
         //Select Character
         if (Input.GetKeyDown("q"))
         {
-            Debug.Log("choose character q");
-
             //select first character
 
             SelectCharacter(null, 0);
@@ -111,8 +109,6 @@ public class ControllerScript : MonoBehaviour
 
         if (Input.GetKeyDown("w"))
         {
-            Debug.Log("choose character w");
-
             //select first character
 
             SelectCharacter(null, 1);
@@ -132,22 +128,16 @@ public class ControllerScript : MonoBehaviour
         //Select ability
         if (Input.GetKeyDown("a"))
         {
-            Debug.Log("choose ability a");
-
             SelectSpell(1);
         }
 
         if (Input.GetKeyDown("s"))
         {
-            Debug.Log("choose ability s");
-
             SelectSpell(2);
         }
 
         if (Input.GetKeyDown("d"))
         {
-            Debug.Log("choose ability d");
-
             SelectSpell(3);
         }
     }
@@ -266,7 +256,6 @@ public class ControllerScript : MonoBehaviour
 
     void Attack()
     {
-        Debug.Log("EndTurn");
         foreach (var item in characters)
         {
             item.GetComponentInChildren<CharacterMovement>().Attack();

@@ -45,28 +45,23 @@ public class Space : MonoBehaviour
         if (heal && damage)
         {
             HighlightColour(Color.magenta);
-            Debug.Log("Both");
         }
         else if (heal && !damage)
         {
             HighlightColour(Color.green);
-            Debug.Log("Heal");
         }
         else if (damage && !heal)
         {
             HighlightColour(Color.red);
-            Debug.Log("Damage");
         }
         else
         {
             HighlightColour(Color.white);
-            Debug.Log("None");
         }
     }
 
     public void HighlightColour(Color colour)
     {
-        Debug.Log(colour);
         Material mat = GetComponentInChildren<MeshRenderer>().material;
         mat.SetColor("_Color", colour);
     }
