@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-7251073399575979769
+--- !u!114 &2091276579413678797
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9,10 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1136581333290086840}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b4784bda49f2c644b9f06e770e47e52, type: 3}
+  m_Script: {fileID: 11500000, guid: fd0ff2849fbfbcf4d8eb239ae05dd730, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  board: {fileID: 0}
 --- !u!1001 &2626157936724098608
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -33,7 +32,7 @@ PrefabInstance:
     - target: {fileID: 3149157474940702600, guid: b84de9e74ffd3c04e975f840d6104bd7,
         type: 3}
       propertyPath: m_Name
-      value: Cryoknight Variant
+      value: Witch Doctor
       objectReference: {fileID: 0}
     - target: {fileID: 3320429177081572671, guid: b84de9e74ffd3c04e975f840d6104bd7,
         type: 3}

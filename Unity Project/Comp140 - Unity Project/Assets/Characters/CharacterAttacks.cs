@@ -125,6 +125,27 @@ public class CharacterAttacks : MonoBehaviour
         return targetArea;
     }
 
+    public TargetSpace[] AcidBomb(int currentSpace)
+    {
+        int[] radius = GetRadius(currentSpace - 9, 0, true);
+        TargetSpace[] targetArea = new TargetSpace[radius.Length];
+
+        for (int n = 0; n < radius.Length; n++)
+        {
+            TargetSpace targetSpace = new TargetSpace
+            {
+                space = radius[n],
+                damage = true,
+                value = 0.15f,
+                effect = false
+            };
+
+            targetArea[n] = targetSpace;
+        }
+
+        return targetArea;
+    }
+
     #endregion
 
     #region Control
@@ -168,6 +189,55 @@ public class CharacterAttacks : MonoBehaviour
         return targetArea;
     }
 
+    public TargetSpace[] Leach(int currentSpace)
+    {
+        int[] line = GetColumn(currentSpace, 3);
+
+        List<int> targetSpaces = new List<int>();
+
+        for (int n = 0; n < line.Length; n++)
+        {
+            if (board.IsSpaceValid(line[n]))
+            {
+                Space space = board.spaces[line[n]].GetComponent<Space>();
+
+                targetSpaces.Add(line[n]);
+
+                if (!space.GetSpace())
+                {
+                    break;
+                }
+            }
+        }
+
+        TargetSpace[] targetArea = new TargetSpace[targetSpaces.Count + 1];
+
+        for (int n = 0; n < targetSpaces.Count; n++)
+        {
+            TargetSpace targetSpace = new TargetSpace
+            {
+                space = targetSpaces[n],
+                damage = true,
+                value = 0.2f,
+                effect = false
+            };
+
+            targetArea[n] = targetSpace;
+        }
+
+        TargetSpace healingSpace = new TargetSpace
+        {
+            space = currentSpace,
+            damage = false,
+            value = 0.2f,
+            effect = false
+        };
+
+        targetArea[targetArea.Length - 1] = healingSpace;
+
+        return targetArea;
+    }
+
     #endregion
 
     #region Healing
@@ -206,6 +276,27 @@ public class CharacterAttacks : MonoBehaviour
         };
 
         targetArea[0] = targetSpace;
+
+        return targetArea;
+    }
+
+    public TargetSpace[] HealingMist(int currentSpace)
+    {
+        int[] radius = GetRadius(currentSpace, 0, true);
+        TargetSpace[] targetArea = new TargetSpace[radius.Length];
+
+        for (int n = 0; n < radius.Length; n++)
+        {
+            TargetSpace targetSpace = new TargetSpace
+            {
+                space = radius[n],
+                damage = false,
+                value = 0.2f,
+                effect = false
+            };
+
+            targetArea[n] = targetSpace;
+        }
 
         return targetArea;
     }

@@ -40,7 +40,7 @@ public class CharacterMovement : MonoBehaviour
         SetSpace(currentSpace, null);
 
         Transform setTransform = teamBoard.GetSpace(spaceIndex);
-        currentSpace = spaceIndex + 6;
+        currentSpace = spaceIndex + boardSize;
         this.transform.position = setTransform.position;
 
         SetSpace(currentSpace, this.gameObject);
@@ -51,7 +51,7 @@ public class CharacterMovement : MonoBehaviour
         SetSpace(currentSpace, null);
 
         Transform setTransform = teamBoard.GetSpace(idleSpace);
-        currentSpace = idleSpace + 9;
+        currentSpace = idleSpace + boardSize;
         this.transform.position = setTransform.position;
 
         SetSpace(currentSpace, this.gameObject);

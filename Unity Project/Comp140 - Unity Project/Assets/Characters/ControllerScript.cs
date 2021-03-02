@@ -106,21 +106,19 @@ public class ControllerScript : MonoBehaviour
 
         if (Input.GetKeyDown("w"))
         {
-            //select first character
+            //select second character
 
             SelectCharacter(null, 1);
         }
 
-        /*
+        
         if (Input.GetKeyDown("e"))
         {
-            Debug.Log("choose character e");
+            //select third character
 
-            //select first character
-
-            currentCharacter = characters[2];
+            SelectCharacter(null, 2);
         }
-        */
+        
 
         //Select ability
         if (Input.GetKeyDown("a"))
