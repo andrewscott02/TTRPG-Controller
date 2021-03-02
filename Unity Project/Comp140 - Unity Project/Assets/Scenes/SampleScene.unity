@@ -153,7 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boardRef: {fileID: 373684432}
-  resistorThreshold: 600
+  resistorThreshold: 400
 --- !u!114 &54842460
 MonoBehaviour:
   m_ObjectHideFlags: 0

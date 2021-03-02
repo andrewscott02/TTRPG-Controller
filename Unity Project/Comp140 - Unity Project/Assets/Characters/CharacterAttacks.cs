@@ -61,7 +61,7 @@ public class CharacterAttacks : MonoBehaviour
 
     public TargetSpace[] WallOfFire(int currentSpace)
     {
-        int[] line = GetRow(currentSpace, 2);
+        int[] line = GetRow(currentSpace, 3);
         TargetSpace[] targetArea = new TargetSpace[line.Length];
 
         for (int n = 0; n < line.Length; n++)
@@ -152,7 +152,7 @@ public class CharacterAttacks : MonoBehaviour
 
     public TargetSpace[] FreezingGrasp(int currentSpace)
     {
-        int[] line = GetColumn(currentSpace, 3);
+        int[] line = GetColumn(currentSpace, 2);
 
         List<int> targetSpaces = new List<int>();
 
@@ -189,9 +189,9 @@ public class CharacterAttacks : MonoBehaviour
         return targetArea;
     }
 
-    public TargetSpace[] Leach(int currentSpace)
+    public TargetSpace[] DrainVitality(int currentSpace)
     {
-        int[] line = GetColumn(currentSpace, 3);
+        int[] line = GetColumn(currentSpace, 2);
 
         List<int> targetSpaces = new List<int>();
 

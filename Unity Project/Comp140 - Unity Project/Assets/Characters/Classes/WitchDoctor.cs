@@ -7,7 +7,7 @@ public class WitchDoctor : CharacterAttacks
     private void Start()
     {
         ability1 = AcidBomb;
-        ability2 = Leach;
+        ability2 = DrainVitality;
         ability3 = HealingMist;
     }
 }
