@@ -16,11 +16,29 @@ public class Health : MonoBehaviour
     {
         Debug.Log(this.gameObject + " was hit for " + damage);
         currentHealth -= damage;
+
+        if (CheckDeath())
+            Die();
     }
 
     public void Heal(float heal)
     {
         Debug.Log(this.gameObject + " was healed for " + heal);
         currentHealth = Mathf.Clamp(currentHealth + heal, 0, maxHealth);
+    }
+
+    private bool CheckDeath()
+    {
+        return currentHealth <= 0;
+    }
+
+    private void Die()
+    {
+        Invoke("Destroy", 0.2f);
+    }
+
+    private void Destroy()
+    {
+        Destroy(this.gameObject);
     }
 }

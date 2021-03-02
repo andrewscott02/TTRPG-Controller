@@ -256,7 +256,8 @@ public class ControllerScript : MonoBehaviour
     {
         foreach (var item in characters)
         {
-            item.GetComponentInChildren<CharacterMovement>().Attack();
+            if (item != null)
+                item.GetComponentInChildren<CharacterMovement>().Attack();
         }
     }
 
