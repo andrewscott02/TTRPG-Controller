@@ -15,12 +15,12 @@ public class CharacterMovement : MonoBehaviour
     [Range(6, 8)]
     public int idleSpace;
 
-    private CharacterAttacks character;
+    public CharacterAttacks character;
     int abilityNum = 1;
 
     #endregion
 
-    private void Start()
+    public virtual void Start()
     {
         character = GetComponent<CharacterAttacks>();
 

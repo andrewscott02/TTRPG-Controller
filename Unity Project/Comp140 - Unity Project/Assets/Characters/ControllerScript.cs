@@ -11,6 +11,8 @@ public class ControllerScript : MonoBehaviour
     public GameObject[] characters;
     private GameObject currentCharacter;
 
+    public GameObject[] enemies;
+
     public FullBoard board;
 
     #endregion
@@ -248,7 +250,13 @@ public class ControllerScript : MonoBehaviour
 
         if (canEndTurn)
         {
+            //get enemies to attack before these are called
+
+            //delay
             Attack();
+
+            //delay
+            Invoke("EnemyMovement", 0.2f);
         }
     }
 
@@ -258,6 +266,15 @@ public class ControllerScript : MonoBehaviour
         {
             if (item != null)
                 item.GetComponentInChildren<CharacterMovement>().Attack();
+        }
+    }
+
+    void EnemyMovement()
+    {
+        foreach (var item in enemies)
+        {
+            if (item != null)
+                item.GetComponentInChildren<RandomMovement>().RandomMoveSpace();
         }
     }
 
