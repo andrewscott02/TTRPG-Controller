@@ -11,7 +11,7 @@ public class ArduinoController : MonoBehaviour
 
     public FullBoard boardRef;
 
-    private bool[] pins = new bool[6];
+    private bool[] pins = new bool[9];
 
     private ControllerScript controller;
 
@@ -29,15 +29,27 @@ public class ArduinoController : MonoBehaviour
         controller = GetComponent<ControllerScript>();
 
         //Movement sensory pins
+        /*
         UduinoManager.Instance.pinMode(AnalogPin.A0, PinMode.Input);
         UduinoManager.Instance.pinMode(AnalogPin.A1, PinMode.Input);
         UduinoManager.Instance.pinMode(AnalogPin.A2, PinMode.Input);
         UduinoManager.Instance.pinMode(AnalogPin.A3, PinMode.Input);
         UduinoManager.Instance.pinMode(AnalogPin.A4, PinMode.Input);
         UduinoManager.Instance.pinMode(AnalogPin.A5, PinMode.Input);
+        */
 
         //End turn sensory pins
-        //UduinoManager.Instance.pinMode(2, PinMode.Input_pullup);
+        
+        UduinoManager.Instance.pinMode(2, PinMode.Input_pullup);
+        UduinoManager.Instance.pinMode(3, PinMode.Input_pullup);
+        UduinoManager.Instance.pinMode(4, PinMode.Input_pullup);
+        UduinoManager.Instance.pinMode(5, PinMode.Input_pullup);
+        UduinoManager.Instance.pinMode(6, PinMode.Input_pullup);
+        UduinoManager.Instance.pinMode(7, PinMode.Input_pullup);
+        UduinoManager.Instance.pinMode(8, PinMode.Input_pullup);
+        UduinoManager.Instance.pinMode(9, PinMode.Input_pullup);
+        UduinoManager.Instance.pinMode(10, PinMode.Input_pullup);
+
     }
 
     #endregion
@@ -47,12 +59,32 @@ public class ArduinoController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
         pins[0] = GetIsPlacedAnalog(AnalogPin.A0);
         pins[1] = GetIsPlacedAnalog(AnalogPin.A1);
         pins[2] = GetIsPlacedAnalog(AnalogPin.A2);
         pins[3] = GetIsPlacedAnalog(AnalogPin.A3);
         pins[4] = GetIsPlacedAnalog(AnalogPin.A4);
         pins[5] = GetIsPlacedAnalog(AnalogPin.A5);
+        */
+        
+        //Board Spaces
+        pins[0] = GetIsPlacedDigital(5);
+        pins[1] = GetIsPlacedDigital(6);
+        pins[2] = GetIsPlacedDigital(7);
+        pins[3] = GetIsPlacedDigital(8);
+        pins[4] = GetIsPlacedDigital(9);
+        pins[5] = GetIsPlacedDigital(10);
+        pins[6] = GetIsPlacedDigital(2);
+        pins[7] = GetIsPlacedDigital(3);
+        pins[8] = GetIsPlacedDigital(4);
+
+        //Idle Spaces
+        /*
+        pins[9] = GetIsPlacedDigital(11);
+        pins[10] = GetIsPlacedDigital(12);
+        pins[12] = GetIsPlacedDigital(13);
+        */
 
         int space = 7;
 
@@ -61,7 +93,7 @@ public class ArduinoController : MonoBehaviour
         int i = 0;
         foreach (var item in pins)
         {
-            Space spaceScript = boardRef.spaces[i + 6].GetComponent<Space>();
+            Space spaceScript = boardRef.spaces[i + 9].GetComponent<Space>();
 
             if (item == true)
             {
@@ -146,6 +178,20 @@ public class ArduinoController : MonoBehaviour
         else
         {
             return true;
+        }
+    }
+
+    bool GetIsPlacedDigital(int pinToRead)
+    {
+        int analogValue = UduinoManager.Instance.digitalRead(pinToRead);
+
+        if (analogValue < 1)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 

@@ -8,6 +8,8 @@ public class RandomMovement : MonoBehaviour
     public Board teamBoard;
     private int currentSpace;
 
+    private int boardSize = 9;
+
     private void Start()
     {
         RandomMoveSpace();
@@ -15,7 +17,7 @@ public class RandomMovement : MonoBehaviour
 
     public void RandomMoveSpace()
     {
-        int space = Random.Range(0, 6);
+        int space = Random.Range(0, boardSize);
 
         Space script = board.spaces[space].GetComponent<Space>();
 

@@ -12,7 +12,9 @@ public class CharacterMovement : MonoBehaviour
     public Board teamBoard;
     private int currentSpace;
 
-    [Range(6, 8)]
+    private int boardSize = 9;
+
+    [Range(9, 11)]
     public int idleSpace;
 
     public CharacterAttacks character;
@@ -49,7 +51,7 @@ public class CharacterMovement : MonoBehaviour
         SetSpace(currentSpace, null);
 
         Transform setTransform = teamBoard.GetSpace(idleSpace);
-        currentSpace = idleSpace + 6;
+        currentSpace = idleSpace + 9;
         this.transform.position = setTransform.position;
 
         SetSpace(currentSpace, this.gameObject);
