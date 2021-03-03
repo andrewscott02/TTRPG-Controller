@@ -12,6 +12,11 @@ public class Health : MonoBehaviour
         currentHealth = maxHealth;
     }
 
+    public float GetHealth()
+    {
+        return currentHealth;
+    }
+
     public void TakeDamage(float damage)
     {
         Debug.Log(this.gameObject + " was hit for " + damage);

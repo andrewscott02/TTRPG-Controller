@@ -49,6 +49,13 @@ MonoBehaviour:
   idle: 0
   damage: 0
   heal: 0
+  anchor: {fileID: 2195602243660024082}
+  attackHighlight: {fileID: 3040559574135498200, guid: 053e9dee31cd618428318446ee7ff44b,
+    type: 3}
+  healHighlight: {fileID: 3040559574135498200, guid: 9fe55bb338d149148a25c6b6bfbcc101,
+    type: 3}
+  bothHighlight: {fileID: 3040559574135498200, guid: f4daab942b0ab8f49b5321c1b892d4bf,
+    type: 3}
   attackEffect: {fileID: 8700936205326785216, guid: 64bf009b3ff28fc44a7a4e5955097016,
     type: 3}
   healEffect: {fileID: 8700936205326785216, guid: 416c4f49ca4909b428b0da02f8c1f32c,
@@ -142,7 +149,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 4979baf313f95324cb14750f7ee587db, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

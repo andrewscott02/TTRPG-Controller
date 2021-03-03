@@ -55,7 +55,7 @@ public class FullBoard : MonoBehaviour
 
     #region Highlight Spaces
 
-    public void HighlightSpace(int space, bool damage, bool heal)
+    public void HighlightSpace(int space, int damage, int heal)
     {
         if (IsSpaceValid(space))
         {
@@ -69,10 +69,10 @@ public class FullBoard : MonoBehaviour
         foreach (var space in spaces)
         {
             Space spaceScript = space.GetComponent<Space>();
-            spaceScript.damage = false;
-            spaceScript.heal = false;
+            spaceScript.damage = 0;
+            spaceScript.heal = 0;
 
-            spaceScript.HighlightColour(Color.white);
+            spaceScript.ResetHighlight();
         }
     }
 

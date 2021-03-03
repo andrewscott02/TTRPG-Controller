@@ -15,11 +15,19 @@ public class Space : MonoBehaviour
 
     private FullBoard board;
 
-    public bool damage = false;
-    public bool heal = false;
+    public int damage = 0;
+    public int heal = 0;
+
+    public Transform anchor;
+
+    public Object attackHighlight;
+    public Object healHighlight;
+    public Object bothHighlight;
 
     public Object attackEffect;
     public Object healEffect;
+
+    private List<GameObject> highlights = new List<GameObject>();
 
     #endregion
 
@@ -59,34 +67,62 @@ public class Space : MonoBehaviour
 
     #region Highlight
 
-    public void SetHighlight(bool newDamage, bool newHeal)
+    public void SetHighlight(int newDamage, int newHeal)
     {
-        if (newDamage)
-        {
-            damage = newDamage;
-        }
+        //ResetHighlight();
+
+        damage += newDamage;
+
+        heal += newHeal;
         
-        if (newHeal)
+        if (heal > 0 && damage > 0)
         {
-            heal = newHeal;
+            int lowest = heal;
+
+            if (damage < heal)
+                lowest = damage;
+
+            for (int n = 0; n < lowest; n++)
+            {
+                //add heal highlight
+                GameObject effect = Instantiate(bothHighlight, anchor) as GameObject;
+                effect.transform.position = anchor.position;
+                highlights.Add(effect);
+            }
+        }
+        else if (heal > 0 && !(damage > 0))
+        {
+            for (int n = 0; n < heal; n++)
+            {
+                //add heal highlight
+                GameObject health = Instantiate(healHighlight, anchor) as GameObject;
+                health.transform.position = anchor.position;
+                highlights.Add(health);
+            }
+        }
+        else if (damage > 0 && !(heal > 0))
+        {
+            for (int n = 0; n < damage; n++)
+            {
+                //add damage highlight
+                GameObject attack = Instantiate(attackHighlight, anchor) as GameObject;
+                attack.transform.position = anchor.position;
+                highlights.Add(attack);
+            }
+        }
+    }
+
+    public void ResetHighlight()
+    {
+        foreach (var item in highlights)
+        {
+            if (item != null)
+            {
+                Destroy(item);
+            }
         }
 
-        if (heal && damage)
-        {
-            HighlightColour(Color.magenta);
-        }
-        else if (heal && !damage)
-        {
-            HighlightColour(Color.green);
-        }
-        else if (damage && !heal)
-        {
-            HighlightColour(Color.red);
-        }
-        else
-        {
-            HighlightColour(Color.white);
-        }
+        highlights.Clear();
     }
 
     public void HighlightColour(Color colour)

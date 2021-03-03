@@ -101,11 +101,11 @@ public class CharacterController : MonoBehaviour
         {
             if (item.Value)
             {
-                board.HighlightSpace(item.Key, true, false);
+                board.HighlightSpace(item.Key, 1, 0);
             }
             else
             {
-                board.HighlightSpace(item.Key, false, true);
+                board.HighlightSpace(item.Key, 0, 1);
             }
         }
     }
