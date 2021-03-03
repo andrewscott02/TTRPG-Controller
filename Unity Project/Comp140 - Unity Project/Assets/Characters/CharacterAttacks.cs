@@ -127,7 +127,7 @@ public class CharacterAttacks : MonoBehaviour
 
     public TargetSpace[] AcidBomb(int currentSpace)
     {
-        int[] radius = GetRadius(currentSpace - 9, 0, true);
+        int[] radius = GetRadius(currentSpace - 9, 0, true, false);
         TargetSpace[] targetArea = new TargetSpace[radius.Length];
 
         for (int n = 0; n < radius.Length; n++)
@@ -282,18 +282,42 @@ public class CharacterAttacks : MonoBehaviour
 
     public TargetSpace[] HealingMist(int currentSpace)
     {
-        int[] radius = GetRadius(currentSpace, 0, true);
-        TargetSpace[] targetArea = new TargetSpace[radius.Length];
+        int[] line = GetColumn(currentSpace, 1);
+        int[] sides = GetSides(currentSpace, 1);
 
-        for (int n = 0; n < radius.Length; n++)
+        int[] spaces = new int[line.Length + sides.Length];
+
+        for (int n = 0; n < line.Length; n++)
+        {
+            spaces[n] = line[n];
+        }
+
+        for (int n = 0; n < sides.Length; n++)
+        {
+            spaces[n + line.Length] = sides[n];
+        }
+
+        TargetSpace[] targetArea = new TargetSpace[spaces.Length];
+
+        bool first = true;
+
+        for (int n = 0; n < spaces.Length; n++)
         {
             TargetSpace targetSpace = new TargetSpace
             {
-                space = radius[n],
+                space = spaces[n],
                 damage = false,
-                value = 0.2f,
                 effect = false
             };
+
+            if (first)
+            {
+                targetSpace.value = 0.4f;
+            }
+            else
+            {
+                targetSpace.value = 0.2f;
+            }
 
             targetArea[n] = targetSpace;
         }
@@ -374,7 +398,7 @@ public class CharacterAttacks : MonoBehaviour
         return lineSpaces;
     }
 
-    public virtual int[] GetRadius(int currentSpace, int spaceOffset, bool getCenter)
+    public virtual int[] GetRadius(int currentSpace, int spaceOffset, bool getCenter, bool diagonal)
     {
         List<int> spacesList = new List<int>();
 
@@ -386,10 +410,21 @@ public class CharacterAttacks : MonoBehaviour
         //Center
         if ((currentSpace - 1) % 3 == 0)
         {
-            for (int n = 1; n <= 4; n++)
+            if (diagonal)
             {
-                spacesList.Add(currentSpace - (3 * spaceOffset) + n);
-                spacesList.Add(currentSpace - (3 * spaceOffset) - n);
+                for (int n = 1; n <= 4; n++)
+                {
+                    spacesList.Add(currentSpace - (3 * spaceOffset) + n);
+                    spacesList.Add(currentSpace - (3 * spaceOffset) - n);
+                }
+            }
+            else
+            {
+                for (int n = 1; n <= 4; n += 2)
+                {
+                    spacesList.Add(currentSpace - (3 * spaceOffset) + n);
+                    spacesList.Add(currentSpace - (3 * spaceOffset) - n);
+                }
             }
         }
 
@@ -398,10 +433,15 @@ public class CharacterAttacks : MonoBehaviour
         {
             spacesList.Add(currentSpace - (3 * spaceOffset) + 1);
             spacesList.Add(currentSpace - (3 * spaceOffset) + 3);
-            spacesList.Add(currentSpace - (3 * spaceOffset) + 4);
 
-            spacesList.Add(currentSpace - (3 * spaceOffset) - 2);
             spacesList.Add(currentSpace - (3 * spaceOffset) - 3);
+
+            if (diagonal)
+            {
+                spacesList.Add(currentSpace - (3 * spaceOffset) + 4);
+
+                spacesList.Add(currentSpace - (3 * spaceOffset) - 2);
+            }
         }
 
         //Right
@@ -409,10 +449,15 @@ public class CharacterAttacks : MonoBehaviour
         {
             spacesList.Add(currentSpace - (3 * spaceOffset) - 1);
             spacesList.Add(currentSpace - (3 * spaceOffset) - 3);
-            spacesList.Add(currentSpace - (3 * spaceOffset) - 4);
 
-            spacesList.Add(currentSpace - (3 * spaceOffset) + 2);
             spacesList.Add(currentSpace - (3 * spaceOffset) + 3);
+
+            if (diagonal)
+            {
+                spacesList.Add(currentSpace - (3 * spaceOffset) - 4);
+
+                spacesList.Add(currentSpace - (3 * spaceOffset) + 2);
+            }
         }
 
         int[] lineSpaces = new int[spacesList.Count];

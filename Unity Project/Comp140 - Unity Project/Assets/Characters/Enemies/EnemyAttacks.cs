@@ -73,13 +73,13 @@ public class EnemyAttacks : CharacterAttacks
         return lineSpaces;
     }
 
-    public override int[] GetRadius(int currentSpace, int spaceOffset, bool getCenter)
+    public override int[] GetRadius(int currentSpace, int spaceOffset, bool getCenter, bool diagonal)
     {
         List<int> spacesList = new List<int>();
 
         if (getCenter)
         {
-            spacesList.Add(currentSpace + (3 * spaceOffset));
+            spacesList.Add(currentSpace - (3 * spaceOffset));
         }
 
         //Center
@@ -99,8 +99,11 @@ public class EnemyAttacks : CharacterAttacks
             spacesList.Add(currentSpace + (3 * spaceOffset) + 3);
             spacesList.Add(currentSpace + (3 * spaceOffset) + 4);
 
-            spacesList.Add(currentSpace + (3 * spaceOffset) - 2);
-            spacesList.Add(currentSpace + (3 * spaceOffset) - 3);
+            if (diagonal)
+            {
+                spacesList.Add(currentSpace + (3 * spaceOffset) - 2);
+                spacesList.Add(currentSpace + (3 * spaceOffset) - 3);
+            }
         }
 
         //Right
@@ -110,8 +113,11 @@ public class EnemyAttacks : CharacterAttacks
             spacesList.Add(currentSpace + (3 * spaceOffset) - 3);
             spacesList.Add(currentSpace + (3 * spaceOffset) - 4);
 
-            spacesList.Add(currentSpace + (3 * spaceOffset) + 2);
-            spacesList.Add(currentSpace + (3 * spaceOffset) + 3);
+            if (diagonal)
+            {
+                spacesList.Add(currentSpace + (3 * spaceOffset) + 2);
+                spacesList.Add(currentSpace + (3 * spaceOffset) + 3);
+            }
         }
 
         int[] lineSpaces = new int[spacesList.Count];

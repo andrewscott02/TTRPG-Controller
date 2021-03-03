@@ -77,6 +77,8 @@ public class Space : MonoBehaviour
         
         if (heal > 0 && damage > 0)
         {
+            ResetHighlight();
+
             int lowest = heal;
 
             if (damage < heal)
