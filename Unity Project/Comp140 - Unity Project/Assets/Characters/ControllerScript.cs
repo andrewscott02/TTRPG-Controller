@@ -154,9 +154,9 @@ public class ControllerScript : MonoBehaviour
 
             if (spaceScript.character != null)
             {
-                if (spaceScript.character.GetComponent<CharacterMovement>() != null)
+                if (spaceScript.character.GetComponent<CharacterController>() != null)
                 {
-                    CharacterMovement moveScript = spaceScript.character.GetComponent<CharacterMovement>();
+                    CharacterController moveScript = spaceScript.character.GetComponent<CharacterController>();
                     if (!spaceScript.idle)
                     {
                         moveScript.Highlight();
@@ -172,7 +172,7 @@ public class ControllerScript : MonoBehaviour
     {
         if (currentCharacter != null)
         {
-            currentCharacter.GetComponentInChildren<CharacterMovement>().Move(spaceIndex);
+            currentCharacter.GetComponentInChildren<CharacterController>().Move(spaceIndex);
         }
 
         board.ResetHighlight();
@@ -184,7 +184,7 @@ public class ControllerScript : MonoBehaviour
     {
         if (currentCharacter != null)
         {
-            currentCharacter.GetComponentInChildren<CharacterMovement>().IdlePosition();
+            currentCharacter.GetComponentInChildren<CharacterController>().IdlePosition();
         }
 
         board.ResetHighlight();
@@ -218,7 +218,7 @@ public class ControllerScript : MonoBehaviour
     {
         if (currentCharacter != null)
         {
-            currentCharacter.GetComponentInChildren<CharacterMovement>().SelectAbility(spell);
+            currentCharacter.GetComponentInChildren<CharacterController>().SelectAbility(spell);
         }
 
         board.ResetHighlight();
@@ -248,14 +248,23 @@ public class ControllerScript : MonoBehaviour
 
         if (canEndTurn)
         {
-            //get enemies to attack before these are called
-
-            //delay
-            Attack();
-
-            //delay
-            Invoke("EnemyMovement", 0.2f);
+            EndTurn();
         }
+    }
+
+    void EndTurn()
+    {
+        //get enemies to attack before these are called
+        Invoke("EnemyAttack", 0);
+
+        //delay
+        Invoke("Attack", 0.01f);
+
+        //delay
+        Invoke("EnemyMovement", 0.2f);
+
+        //Enemy change skills
+        Invoke("EnemySpellSelection", 0.2f);
     }
 
     void Attack()
@@ -263,7 +272,7 @@ public class ControllerScript : MonoBehaviour
         foreach (var item in characters)
         {
             if (item != null)
-                item.GetComponentInChildren<CharacterMovement>().Attack();
+                item.GetComponentInChildren<CharacterController>().Attack();
         }
     }
 
@@ -272,8 +281,42 @@ public class ControllerScript : MonoBehaviour
         foreach (var item in enemies)
         {
             if (item != null)
-                item.GetComponentInChildren<RandomMovement>().RandomMoveSpace();
+            {
+                item.GetComponentInChildren<EnemyController>().RandomMoveSpace();
+
+                Debug.Log("EnemyMove");
+            }
         }
+    }
+
+    void EnemyAttack()
+    {
+        foreach (var item in enemies)
+        {
+            if (item != null)
+            {
+                item.GetComponentInChildren<EnemyController>().Attack();
+
+                Debug.Log("EnemyAttack");
+            }
+        }
+    }
+
+    void EnemySpellSelection()
+    {
+        foreach (var item in enemies)
+        {
+            if (item != null)
+            {
+                item.GetComponentInChildren<EnemyController>().RandomSpellSelection();
+
+                Debug.Log("EnemySelectSpell");
+            }
+        }
+
+        board.ResetHighlight();
+
+        Highlight();
     }
 
     #endregion

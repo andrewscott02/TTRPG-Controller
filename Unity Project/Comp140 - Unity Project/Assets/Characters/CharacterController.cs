@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterMovement : MonoBehaviour
+public class CharacterController : MonoBehaviour
 {
     #region Setup
 
@@ -10,15 +10,15 @@ public class CharacterMovement : MonoBehaviour
 
     public FullBoard board;
     public Board teamBoard;
-    private int currentSpace;
+    protected int currentSpace;
 
-    private int boardSize = 9;
+    protected int boardSize = 9;
 
     [Range(9, 11)]
     public int idleSpace;
 
     public CharacterAttacks character;
-    int abilityNum = 1;
+    protected int abilityNum = 1;
 
     #endregion
 
@@ -35,7 +35,7 @@ public class CharacterMovement : MonoBehaviour
 
     #region Movement
 
-    public void Move(int spaceIndex)
+    public virtual void Move(int spaceIndex)
     {
         SetSpace(currentSpace, null);
 
@@ -46,7 +46,7 @@ public class CharacterMovement : MonoBehaviour
         SetSpace(currentSpace, this.gameObject);
     }
 
-    public void IdlePosition()
+    public virtual void IdlePosition()
     {
         SetSpace(currentSpace, null);
 
@@ -57,7 +57,7 @@ public class CharacterMovement : MonoBehaviour
         SetSpace(currentSpace, this.gameObject);
     }
 
-    public void SetSpace(int space, GameObject newCharacter)
+    public virtual void SetSpace(int space, GameObject newCharacter)
     {
         Space spaceScript = board.spaces[space].GetComponent<Space>();
 

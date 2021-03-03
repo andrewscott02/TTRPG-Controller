@@ -7,7 +7,7 @@ public class Cryoknight : CharacterAttacks
     private void Start()
     {
         ability1 = ConeOfCold;
-        ability2 = FreezingGrasp;
+        ability2 = FrostBite;
         ability3 = FrozenArmour;
     }
 }

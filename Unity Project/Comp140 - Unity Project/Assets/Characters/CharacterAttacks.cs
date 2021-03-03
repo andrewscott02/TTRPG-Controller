@@ -16,7 +16,7 @@ public class CharacterAttacks : MonoBehaviour
 
     #region Variables
 
-    private FullBoard board;
+    protected FullBoard board;
 
     public delegate TargetSpace[] Ability(int currentSpace);
 
@@ -26,7 +26,7 @@ public class CharacterAttacks : MonoBehaviour
 
     #endregion
 
-    private void Awake()
+    protected void Awake()
     {
         GameObject reference = GameObject.Find("Board");
         board = reference.GetComponent<FullBoard>();
@@ -40,7 +40,7 @@ public class CharacterAttacks : MonoBehaviour
 
     public TargetSpace[] Disintegration(int currentSpace)
     {
-        int[] line = GetColumn(currentSpace, 3);
+        int[] line = GetColumn(currentSpace, 4);
         TargetSpace[] targetArea = new TargetSpace[line.Length];
 
         for (int n = 0; n < line.Length; n++)
@@ -150,7 +150,7 @@ public class CharacterAttacks : MonoBehaviour
 
     #region Control
 
-    public TargetSpace[] FreezingGrasp(int currentSpace)
+    public TargetSpace[] FrostBite(int currentSpace)
     {
         int[] line = GetColumn(currentSpace, 2);
 
@@ -179,7 +179,7 @@ public class CharacterAttacks : MonoBehaviour
             {
                 space = targetSpaces[n],
                 damage = true,
-                value = 0.2f,
+                value = 0.4f,
                 effect = true
             };
 
@@ -191,7 +191,7 @@ public class CharacterAttacks : MonoBehaviour
 
     public TargetSpace[] DrainVitality(int currentSpace)
     {
-        int[] line = GetColumn(currentSpace, 2);
+        int[] line = GetColumn(currentSpace, 3);
 
         List<int> targetSpaces = new List<int>();
 
@@ -307,7 +307,7 @@ public class CharacterAttacks : MonoBehaviour
 
     #region Target Spaces
 
-    int[] GetColumn(int currentSpace, int spaces)
+    public virtual int[] GetColumn(int currentSpace, int spaces)
     {
         int[] lineSpaces = new int[spaces];
 
@@ -319,7 +319,7 @@ public class CharacterAttacks : MonoBehaviour
         return lineSpaces;
     }
 
-    int[] GetRow(int currentSpace, int spaceOffset)
+    public virtual int[] GetRow(int currentSpace, int spaceOffset)
     {
         int[] lineSpaces = new int[3];
 
@@ -341,7 +341,7 @@ public class CharacterAttacks : MonoBehaviour
         return lineSpaces;
     }
 
-    int[] GetSides(int currentSpace, int spaceOffset)
+    public virtual int[] GetSides(int currentSpace, int spaceOffset)
     {
         List<int> spacesList = new List<int>();
 
@@ -374,7 +374,7 @@ public class CharacterAttacks : MonoBehaviour
         return lineSpaces;
     }
 
-    int[] GetRadius(int currentSpace, int spaceOffset, bool getCenter)
+    public virtual int[] GetRadius(int currentSpace, int spaceOffset, bool getCenter)
     {
         List<int> spacesList = new List<int>();
 

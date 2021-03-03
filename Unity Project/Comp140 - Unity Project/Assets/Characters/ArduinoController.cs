@@ -35,13 +35,19 @@ public class ArduinoController : MonoBehaviour
         UduinoManager.Instance.pinMode(AnalogPin.A3, PinMode.Input);
         UduinoManager.Instance.pinMode(AnalogPin.A4, PinMode.Input);
         UduinoManager.Instance.pinMode(AnalogPin.A5, PinMode.Input);
-        
 
         //End turn sensory pins
         
+        UduinoManager.Instance.pinMode(2, PinMode.Input);
+        UduinoManager.Instance.pinMode(3, PinMode.Input);
+        UduinoManager.Instance.pinMode(4, PinMode.Input);
+
+        /*
         UduinoManager.Instance.pinMode(2, PinMode.Input_pullup);
         UduinoManager.Instance.pinMode(3, PinMode.Input_pullup);
         UduinoManager.Instance.pinMode(4, PinMode.Input_pullup);
+        */
+
         /*
         UduinoManager.Instance.pinMode(5, PinMode.Input_pullup);
         UduinoManager.Instance.pinMode(6, PinMode.Input_pullup);
@@ -75,9 +81,11 @@ public class ArduinoController : MonoBehaviour
         pins[4] = GetIsPlacedDigital(9);
         pins[5] = GetIsPlacedDigital(10);
         */
+        
         pins[6] = GetIsPlacedDigital(2);
         pins[7] = GetIsPlacedDigital(3);
         pins[8] = GetIsPlacedDigital(4);
+        
 
         //Idle Spaces
         /*

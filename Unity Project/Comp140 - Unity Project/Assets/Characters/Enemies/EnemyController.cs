@@ -2,17 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RandomMovement : MonoBehaviour
+public class EnemyController : CharacterController
 {
-    public FullBoard board;
-    public Board teamBoard;
-    private int currentSpace;
-
-    private int boardSize = 9;
-
-    private void Start()
+    public override void Start()
     {
+        character = GetComponent<CharacterAttacks>();
+
         RandomMoveSpace();
+        RandomSpellSelection();
+    }
+
+    public override void IdlePosition()
+    {
+
     }
 
     public void RandomMoveSpace()
@@ -31,7 +33,7 @@ public class RandomMovement : MonoBehaviour
         }
     }
 
-    public void Move(int spaceIndex)
+    public override void Move(int spaceIndex)
     {
         SetSpace(currentSpace, null);
 
@@ -42,10 +44,19 @@ public class RandomMovement : MonoBehaviour
         SetSpace(currentSpace, this.gameObject);
     }
 
-    public void SetSpace(int space, GameObject newCharacter)
+    public override void SetSpace(int space, GameObject newCharacter)
     {
         Space spaceScript = board.spaces[space].GetComponent<Space>();
 
         spaceScript.SetSpace(newCharacter);
+    }
+
+    public void RandomSpellSelection()
+    {
+        abilityNum = Random.Range(1, 4);
+
+        board.ResetHighlight();
+
+        Invoke("Highlight", 0.15f);
     }
 }
