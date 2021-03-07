@@ -37,6 +37,9 @@ public class CharacterController : MonoBehaviour
 
     public virtual void Move(int spaceIndex)
     {
+        if (currentSpace == spaceIndex + boardSize)
+            return;
+
         SetSpace(currentSpace, null);
 
         Transform setTransform = teamBoard.GetSpace(spaceIndex);
@@ -48,6 +51,9 @@ public class CharacterController : MonoBehaviour
 
     public virtual void IdlePosition()
     {
+        if (currentSpace == idleSpace)
+            return;
+
         SetSpace(currentSpace, null);
 
         Transform setTransform = teamBoard.GetSpace(idleSpace);

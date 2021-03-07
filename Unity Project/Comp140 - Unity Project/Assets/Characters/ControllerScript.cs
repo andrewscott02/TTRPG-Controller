@@ -173,11 +173,11 @@ public class ControllerScript : MonoBehaviour
         if (currentCharacter != null)
         {
             currentCharacter.GetComponentInChildren<CharacterController>().Move(spaceIndex);
+
+            board.ResetHighlight();
+
+            Highlight();
         }
-
-        board.ResetHighlight();
-
-        Highlight();
     }
 
     public void IdlePosition()
@@ -185,11 +185,11 @@ public class ControllerScript : MonoBehaviour
         if (currentCharacter != null)
         {
             currentCharacter.GetComponentInChildren<CharacterController>().IdlePosition();
+
+            board.ResetHighlight();
+
+            Highlight();
         }
-
-        board.ResetHighlight();
-
-        Highlight();
     }
 
     #endregion
@@ -219,11 +219,11 @@ public class ControllerScript : MonoBehaviour
         if (currentCharacter != null)
         {
             currentCharacter.GetComponentInChildren<CharacterController>().SelectAbility(spell);
+
+            board.ResetHighlight();
+
+            Highlight();
         }
-
-        board.ResetHighlight();
-
-        Highlight();
     }
 
     #endregion
