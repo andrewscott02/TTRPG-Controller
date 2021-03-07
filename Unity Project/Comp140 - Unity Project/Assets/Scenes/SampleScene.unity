@@ -201,6 +201,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Witch Doctor
       objectReference: {fileID: 0}
+    - target: {fileID: 1544807540518489315, guid: 29329b1e242fb2146a6e50f4750c55d3,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8b027d5533d270a46a9750243966bbe7, type: 2}
     - target: {fileID: 2139508556328573596, guid: 29329b1e242fb2146a6e50f4750c55d3,
         type: 3}
       propertyPath: m_RootOrder
@@ -1536,6 +1541,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cryoknight
       objectReference: {fileID: 0}
+    - target: {fileID: 1544807540518489315, guid: 4c0fe41194d0dbb4dbe7331ec89a4f4d,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6014dbf07f5bc77468bca06cb63d5b75, type: 2}
     - target: {fileID: 2139508556328573596, guid: 4c0fe41194d0dbb4dbe7331ec89a4f4d,
         type: 3}
       propertyPath: m_RootOrder
@@ -1942,5 +1952,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6881786710034892974, guid: e3a609303d1016f4193bbc42eda914a7,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9508a876c2928994eb9bfe7220081dd5, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e3a609303d1016f4193bbc42eda914a7, type: 3}
