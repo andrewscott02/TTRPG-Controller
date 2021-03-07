@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b4784bda49f2c644b9f06e770e47e52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  board: {fileID: 0}
 --- !u!1001 &2626157936724098608
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -56,6 +55,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8700936205326785216, guid: 64bf009b3ff28fc44a7a4e5955097016,
         type: 3}
+    - target: {fileID: 3531313586409321171, guid: b84de9e74ffd3c04e975f840d6104bd7,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6014dbf07f5bc77468bca06cb63d5b75, type: 2}
     - target: {fileID: 4161593275592778924, guid: b84de9e74ffd3c04e975f840d6104bd7,
         type: 3}
       propertyPath: m_RootOrder

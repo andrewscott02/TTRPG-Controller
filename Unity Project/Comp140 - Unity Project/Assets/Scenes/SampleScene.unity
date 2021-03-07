@@ -264,7 +264,7 @@ PrefabInstance:
     - target: {fileID: 8376848715511532131, guid: 29329b1e242fb2146a6e50f4750c55d3,
         type: 3}
       propertyPath: idleSpace
-      value: 11
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 8376848715511532131, guid: 29329b1e242fb2146a6e50f4750c55d3,
         type: 3}
@@ -923,6 +923,11 @@ PrefabInstance:
       propertyPath: teamBoard
       value: 
       objectReference: {fileID: 1216300843}
+    - target: {fileID: 1039081228204252814, guid: 4ed16ffca6b93c74dac919da27608488,
+        type: 3}
+      propertyPath: highlightSpaces
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7074330084741405642, guid: 4ed16ffca6b93c74dac919da27608488,
         type: 3}
       propertyPath: m_Name
@@ -988,6 +993,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7074330084741405644, guid: 4ed16ffca6b93c74dac919da27608488,
+        type: 3}
+      propertyPath: maxHealth
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7074330084741405645, guid: 4ed16ffca6b93c74dac919da27608488,
         type: 3}
       propertyPath: board
@@ -1017,6 +1027,11 @@ PrefabInstance:
       propertyPath: teamBoard
       value: 
       objectReference: {fileID: 1216300843}
+    - target: {fileID: 1039081228204252814, guid: 4ed16ffca6b93c74dac919da27608488,
+        type: 3}
+      propertyPath: highlightSpaces
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7074330084741405642, guid: 4ed16ffca6b93c74dac919da27608488,
         type: 3}
       propertyPath: m_Name
@@ -1082,6 +1097,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7074330084741405644, guid: 4ed16ffca6b93c74dac919da27608488,
+        type: 3}
+      propertyPath: maxHealth
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4ed16ffca6b93c74dac919da27608488, type: 3}
 --- !u!1001 &1808640561
@@ -1101,6 +1121,11 @@ PrefabInstance:
       propertyPath: teamBoard
       value: 
       objectReference: {fileID: 1216300843}
+    - target: {fileID: 1039081228204252814, guid: 4ed16ffca6b93c74dac919da27608488,
+        type: 3}
+      propertyPath: highlightSpaces
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7074330084741405642, guid: 4ed16ffca6b93c74dac919da27608488,
         type: 3}
       propertyPath: m_Name
@@ -1165,6 +1190,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7074330084741405644, guid: 4ed16ffca6b93c74dac919da27608488,
+        type: 3}
+      propertyPath: maxHealth
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4ed16ffca6b93c74dac919da27608488, type: 3}
@@ -1845,7 +1875,7 @@ PrefabInstance:
     - target: {fileID: 4517617640081051182, guid: e3a609303d1016f4193bbc42eda914a7,
         type: 3}
       propertyPath: idleSpace
-      value: 9
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 4517617640081051182, guid: e3a609303d1016f4193bbc42eda914a7,
         type: 3}

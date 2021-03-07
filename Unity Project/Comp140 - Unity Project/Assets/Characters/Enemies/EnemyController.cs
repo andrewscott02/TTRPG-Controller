@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemyController : CharacterController
 {
+    public bool highlightSpaces = true;
+
     public override void Start()
     {
         character = GetComponent<CharacterAttacks>();
@@ -58,5 +60,11 @@ public class EnemyController : CharacterController
         board.ResetHighlight();
 
         Invoke("Highlight", 0.15f);
+    }
+
+    public override void Highlight()
+    {
+        if (highlightSpaces)
+            base.Highlight();
     }
 }

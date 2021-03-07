@@ -93,7 +93,7 @@ public class CharacterController : MonoBehaviour
         }
     }
 
-    public void Highlight()
+    public virtual void Highlight()
     {
         Dictionary<int, bool> spacesDictionary = GetAbilitySpaces();
 
