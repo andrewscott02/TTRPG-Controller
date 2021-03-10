@@ -8,6 +8,7 @@ public class Enemies : EnemyAttacks
     {
         ability1 = WallOfFire;
         ability2 = DrainVitality;
-        ability3 = HealingBurst;
+        ability3 = GleamingBlade;
+        ability4 = HealingMist;
     }
 }

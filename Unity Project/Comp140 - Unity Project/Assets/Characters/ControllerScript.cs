@@ -110,7 +110,6 @@ public class ControllerScript : MonoBehaviour
 
             SelectCharacter(null, 1);
         }
-
         
         if (Input.GetKeyDown("e"))
         {
@@ -118,7 +117,14 @@ public class ControllerScript : MonoBehaviour
 
             SelectCharacter(null, 2);
         }
-        
+
+        if (Input.GetKeyDown("r"))
+        {
+            //select fourth character
+
+            SelectCharacter(null, 3);
+        }
+
 
         //Select ability
         if (Input.GetKeyDown("a"))
@@ -134,6 +140,11 @@ public class ControllerScript : MonoBehaviour
         if (Input.GetKeyDown("d"))
         {
             SelectSpell(3);
+        }
+
+        if (Input.GetKeyDown("f"))
+        {
+            SelectSpell(4);
         }
     }
 

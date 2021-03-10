@@ -8,6 +8,7 @@ public class WitchDoctor : CharacterAttacks
     {
         ability1 = AcidBomb;
         ability2 = DrainVitality;
-        ability3 = HealingMist;
+        ability3 = Entangle;
+        ability4 = HealingMist;
     }
 }

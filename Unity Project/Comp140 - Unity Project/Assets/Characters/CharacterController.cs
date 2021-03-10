@@ -14,7 +14,7 @@ public class CharacterController : MonoBehaviour
 
     protected int boardSize = 9;
 
-    [Range(9, 11)]
+    [Range(9, 12)]
     public int idleSpace;
 
     public CharacterAttacks character;
@@ -91,7 +91,7 @@ public class CharacterController : MonoBehaviour
                 board.Heal(item.space, item.value);
             }
 
-            if (item.effect)
+            if (item.stun)
             {
                 //stun
                 board.Stun(item.space);
@@ -146,6 +146,10 @@ public class CharacterController : MonoBehaviour
         if (abilityNum == 3)
         {
             targetSpaces = character.ability3(currentSpace);
+        }
+        if (abilityNum == 4)
+        {
+            targetSpaces = character.ability4(currentSpace);
         }
 
         return targetSpaces;

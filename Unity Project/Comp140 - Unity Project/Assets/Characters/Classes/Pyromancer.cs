@@ -8,6 +8,7 @@ public class Pyromancer : CharacterAttacks
     {
         ability1 = Disintegration;
         ability2 = WallOfFire;
-        ability3 = HealingBurst;
+        ability3 = Flamethrower;
+        ability4 = HealingFlames;
     }
 }

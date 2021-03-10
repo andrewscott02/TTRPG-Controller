@@ -7,7 +7,8 @@ public class TargetSpace
     public int space;
     public bool damage;
     public float value;
-    public bool effect;
+    public bool stun;
+    public bool shield = false;
 }
 
 public class CharacterAttacks : MonoBehaviour
@@ -23,6 +24,7 @@ public class CharacterAttacks : MonoBehaviour
     public Ability ability1;
     public Ability ability2;
     public Ability ability3;
+    public Ability ability4;
 
     #endregion
 
@@ -50,7 +52,7 @@ public class CharacterAttacks : MonoBehaviour
                 space = line[n],
                 damage = true,
                 value = 0.4f,
-                effect = false
+                stun = false
             };
 
             targetArea[n] = targetSpace;
@@ -71,7 +73,7 @@ public class CharacterAttacks : MonoBehaviour
                 space = line[n],
                 damage = true,
                 value = 0.2f,
-                effect = false
+                stun = false
             };
 
             targetArea[n] = targetSpace;
@@ -80,7 +82,52 @@ public class CharacterAttacks : MonoBehaviour
         return targetArea;
     }
 
-    public TargetSpace[] ConeOfCold(int currentSpace)
+    public TargetSpace[] Flamethrower(int currentSpace)
+    {
+        int[] line = GetColumn(currentSpace, 3);
+        int[] sides = GetSides(currentSpace, 2);
+
+        int[] spaces = new int[line.Length + sides.Length];
+
+        for (int n = 0; n < line.Length; n++)
+        {
+            spaces[n] = line[n];
+        }
+
+        for (int n = 0; n < sides.Length; n++)
+        {
+            spaces[n + line.Length] = sides[n];
+        }
+
+        TargetSpace[] targetArea = new TargetSpace[spaces.Length];
+
+        bool first = true;
+
+        for (int n = 0; n < spaces.Length; n++)
+        {
+            TargetSpace targetSpace = new TargetSpace
+            {
+                space = spaces[n],
+                damage = true,
+                stun = false
+            };
+
+            if (first)
+            {
+                targetSpace.value = 0.3f;
+            }
+            else
+            {
+                targetSpace.value = 0.2f;
+            }
+
+            targetArea[n] = targetSpace;
+        }
+
+        return targetArea;
+    }
+
+    public TargetSpace[] GleamingBlade(int currentSpace)
     {
         int[] line = GetColumn(currentSpace, 2);
         int[] sides = GetSides(currentSpace, 2);
@@ -107,7 +154,7 @@ public class CharacterAttacks : MonoBehaviour
             {
                 space = spaces[n],
                 damage = true,
-                effect = false
+                stun = false
             };
 
             if (first)
@@ -116,7 +163,7 @@ public class CharacterAttacks : MonoBehaviour
             }
             else
             {
-                targetSpace.value = 0.2f;
+                targetSpace.value = 0.3f;
             }
 
             targetArea[n] = targetSpace;
@@ -137,7 +184,7 @@ public class CharacterAttacks : MonoBehaviour
                 space = radius[n],
                 damage = true,
                 value = 0.15f,
-                effect = false
+                stun = false
             };
 
             targetArea[n] = targetSpace;
@@ -150,7 +197,7 @@ public class CharacterAttacks : MonoBehaviour
 
     #region Control
 
-    public TargetSpace[] FrostBite(int currentSpace)
+    public TargetSpace[] SearingStrike(int currentSpace)
     {
         int[] line = GetColumn(currentSpace, 2);
 
@@ -180,7 +227,7 @@ public class CharacterAttacks : MonoBehaviour
                 space = targetSpaces[n],
                 damage = true,
                 value = 0.4f,
-                effect = true
+                stun = true
             };
 
             targetArea[n] = targetSpace;
@@ -219,7 +266,7 @@ public class CharacterAttacks : MonoBehaviour
                 space = targetSpaces[n],
                 damage = true,
                 value = 0.2f,
-                effect = false
+                stun = false
             };
 
             targetArea[n] = targetSpace;
@@ -230,10 +277,27 @@ public class CharacterAttacks : MonoBehaviour
             space = currentSpace,
             damage = false,
             value = 0.2f,
-            effect = false
+            stun = false
         };
 
         targetArea[targetArea.Length - 1] = healingSpace;
+
+        return targetArea;
+    }
+
+    public TargetSpace[] Entangle(int currentSpace)
+    {
+        TargetSpace[] targetArea = new TargetSpace[1];
+
+        TargetSpace targetSpace = new TargetSpace
+        {
+            space = currentSpace - 9,
+            damage = true,
+            value = 0.2f,
+            stun = true
+        };
+
+        targetArea[0] = targetSpace;
 
         return targetArea;
     }
@@ -242,28 +306,7 @@ public class CharacterAttacks : MonoBehaviour
 
     #region Healing
 
-    public TargetSpace[] HealingBurst(int currentSpace)
-    {
-        int[] line = GetRow(currentSpace, 0);
-        TargetSpace[] targetArea = new TargetSpace[line.Length];
-
-        for (int n = 0; n < line.Length; n++)
-        {
-            TargetSpace targetSpace = new TargetSpace
-            {
-                space = line[n],
-                damage = false,
-                value = 0.2f,
-                effect = false
-            };
-
-            targetArea[n] = targetSpace;
-        }
-
-        return targetArea;
-    }
-
-    public TargetSpace[] FrozenArmour(int currentSpace)
+    public TargetSpace[] HealingFlames(int currentSpace)
     {
         TargetSpace[] targetArea = new TargetSpace[1];
 
@@ -271,8 +314,8 @@ public class CharacterAttacks : MonoBehaviour
         {
             space = currentSpace,
             damage = false,
-            value = 0.4f,
-            effect = false
+            value = 0.3f,
+            stun = false
         };
 
         targetArea[0] = targetSpace;
@@ -280,10 +323,10 @@ public class CharacterAttacks : MonoBehaviour
         return targetArea;
     }
 
-    public TargetSpace[] HealingMist(int currentSpace)
+    public TargetSpace[] CleanseWounds(int currentSpace)
     {
-        int[] line = GetColumn(currentSpace, 1);
-        int[] sides = GetSides(currentSpace, 1);
+        int[] line = GetColumn(currentSpace + 6, 2);
+        int[] sides = GetSides(currentSpace + 6, 1);
 
         int[] spaces = new int[line.Length + sides.Length];
 
@@ -307,7 +350,58 @@ public class CharacterAttacks : MonoBehaviour
             {
                 space = spaces[n],
                 damage = false,
-                effect = false
+                stun = false
+            };
+
+            if (first)
+            {
+                targetSpace.value = 0.3f;
+            }
+            else
+            {
+                targetSpace.value = 0.2f;
+            }
+
+            targetArea[n] = targetSpace;
+        }
+
+        return targetArea;
+    }
+
+    public TargetSpace[] FaithfulWard(int currentSpace)
+    {
+        int[] line = GetColumn(currentSpace + 6, 2);
+        int[] sidesRow1 = GetSides(currentSpace + 3, 1);
+        int[] sidesRow2 = GetSides(currentSpace + 6, 1);
+
+        int[] spaces = new int[line.Length + sidesRow1.Length + sidesRow2.Length];
+
+        for (int n = 0; n < line.Length; n++)
+        {
+            spaces[n] = line[n];
+        }
+
+        for (int n = 0; n < sidesRow1.Length; n++)
+        {
+            spaces[n + line.Length] = sidesRow1[n];
+        }
+
+        for (int n = 0; n < sidesRow2.Length; n++)
+        {
+            spaces[n + line.Length + sidesRow1.Length] = sidesRow2[n];
+        }
+
+        TargetSpace[] targetArea = new TargetSpace[spaces.Length];
+
+        bool first = true;
+
+        for (int n = 0; n < spaces.Length; n++)
+        {
+            TargetSpace targetSpace = new TargetSpace
+            {
+                space = spaces[n],
+                damage = false,
+                stun = false
             };
 
             if (first)
@@ -318,6 +412,27 @@ public class CharacterAttacks : MonoBehaviour
             {
                 targetSpace.value = 0.2f;
             }
+
+            targetArea[n] = targetSpace;
+        }
+
+        return targetArea;
+    }
+
+    public TargetSpace[] HealingMist(int currentSpace)
+    {
+        int[] line = GetRow(currentSpace, 0);
+        TargetSpace[] targetArea = new TargetSpace[line.Length];
+
+        for (int n = 0; n < line.Length; n++)
+        {
+            TargetSpace targetSpace = new TargetSpace
+            {
+                space = line[n],
+                damage = false,
+                value = 0.2f,
+                stun = false
+            };
 
             targetArea[n] = targetSpace;
         }
