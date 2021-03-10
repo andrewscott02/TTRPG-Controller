@@ -74,7 +74,7 @@ public class CharacterController : MonoBehaviour
 
     #region Attack
 
-    public void Attack()
+    public virtual void Attack()
     {
         TargetSpace[] targetSpaces = GetAbility();
 

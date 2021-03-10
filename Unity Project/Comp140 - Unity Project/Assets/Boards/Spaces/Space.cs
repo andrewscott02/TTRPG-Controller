@@ -163,7 +163,14 @@ public class Space : MonoBehaviour
 
     public void Stun()
     {
-        Debug.Log("Stun");
+        Instantiate(healEffect, transform);
+
+        if (character != null)
+        {
+            EnemyController controller = character.GetComponent<EnemyController>();
+
+            controller.Stun();
+        }
     }
 
     #endregion
