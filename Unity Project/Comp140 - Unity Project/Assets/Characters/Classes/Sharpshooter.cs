@@ -6,9 +6,9 @@ public class Sharpshooter : CharacterAttacks
 {
     private void Start()
     {
-        ability1 = GleamingBlade;
-        ability2 = SearingStrike;
-        ability3 = CleanseWounds;
-        ability4 = FaithfulWard;
+        ability1 = SerpentineStrike;
+        ability2 = VenomBite;
+        ability3 = Flamethrower;
+        ability4 = HealingElixir;
     }
 }

@@ -11,7 +11,7 @@ public class HealthText : MonoBehaviour
 
     private void Update()
     {
-        float currentHealthFloat = health.GetHealth();
+        float currentHealthFloat = (health.GetHealth() * 100);
 
         text.text = currentHealthFloat.ToString();
     }

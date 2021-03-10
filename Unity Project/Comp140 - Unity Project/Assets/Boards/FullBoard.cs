@@ -57,7 +57,7 @@ public class FullBoard : MonoBehaviour
 
     public void HighlightSpace(int space, int damage, int heal)
     {
-        Debug.Log("highlight");
+        //Debug.Log("highlight");
         if (IsSpaceValid(space))
         {
             Space spaceScript = spaces[space].GetComponent<Space>();
@@ -67,7 +67,7 @@ public class FullBoard : MonoBehaviour
 
     public void ResetHighlight()
     {
-        Debug.Log("resethighlight");
+        //Debug.Log("resethighlight");
         foreach (var space in spaces)
         {
             Space spaceScript = space.GetComponent<Space>();

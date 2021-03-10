@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccb90b2da5dd0f04ab398167e04b7a96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 2
+  maxHealth: 3
 --- !u!114 &1039081228204252814
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63,6 +63,7 @@ MonoBehaviour:
   teamBoard: {fileID: 0}
   idleSpace: 9
   character: {fileID: 0}
+  highlightSpaces: 1
 --- !u!114 &8209468846578205138
 MonoBehaviour:
   m_ObjectHideFlags: 0

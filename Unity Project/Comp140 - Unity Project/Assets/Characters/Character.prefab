@@ -48,6 +48,7 @@ MonoBehaviour:
   board: {fileID: 0}
   teamBoard: {fileID: 0}
   idleSpace: 0
+  character: {fileID: 0}
 --- !u!114 &2244976585223232951
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -193,6 +193,27 @@ public class CharacterAttacks : MonoBehaviour
         return targetArea;
     }
 
+    public TargetSpace[] SerpentineStrike(int currentSpace)
+    {
+        int[] line = GetColumn(currentSpace, 4);
+        TargetSpace[] targetArea = new TargetSpace[line.Length];
+
+        for (int n = 0; n < line.Length; n++)
+        {
+            TargetSpace targetSpace = new TargetSpace
+            {
+                space = line[n],
+                damage = true,
+                value = 0.4f,
+                stun = false
+            };
+
+            targetArea[n] = targetSpace;
+        }
+
+        return targetArea;
+    }
+
     #endregion
 
     #region Control
@@ -302,6 +323,45 @@ public class CharacterAttacks : MonoBehaviour
         return targetArea;
     }
 
+    public TargetSpace[] VenomBite(int currentSpace)
+    {
+        int[] line = GetColumn(currentSpace, 3);
+
+        List<int> targetSpaces = new List<int>();
+
+        for (int n = 0; n < line.Length; n++)
+        {
+            if (board.IsSpaceValid(line[n]))
+            {
+                Space space = board.spaces[line[n]].GetComponent<Space>();
+
+                targetSpaces.Add(line[n]);
+
+                if (!space.GetSpace())
+                {
+                    break;
+                }
+            }
+        }
+
+        TargetSpace[] targetArea = new TargetSpace[targetSpaces.Count];
+
+        for (int n = 0; n < targetSpaces.Count; n++)
+        {
+            TargetSpace targetSpace = new TargetSpace
+            {
+                space = targetSpaces[n],
+                damage = true,
+                value = 0.3f,
+                stun = true
+            };
+
+            targetArea[n] = targetSpace;
+        }
+
+        return targetArea;
+    }
+
     #endregion
 
     #region Healing
@@ -314,7 +374,7 @@ public class CharacterAttacks : MonoBehaviour
         {
             space = currentSpace,
             damage = false,
-            value = 0.3f,
+            value = 0.2f,
             stun = false
         };
 
@@ -355,11 +415,11 @@ public class CharacterAttacks : MonoBehaviour
 
             if (first)
             {
-                targetSpace.value = 0.3f;
+                targetSpace.value = 0.05f;
             }
             else
             {
-                targetSpace.value = 0.2f;
+                targetSpace.value = 0.15f;
             }
 
             targetArea[n] = targetSpace;
@@ -406,11 +466,11 @@ public class CharacterAttacks : MonoBehaviour
 
             if (first)
             {
-                targetSpace.value = 0.4f;
+                targetSpace.value = 0f;
             }
             else
             {
-                targetSpace.value = 0.2f;
+                targetSpace.value = 0f;
             }
 
             targetArea[n] = targetSpace;
@@ -430,12 +490,29 @@ public class CharacterAttacks : MonoBehaviour
             {
                 space = line[n],
                 damage = false,
-                value = 0.2f,
+                value = 0.15f,
                 stun = false
             };
 
             targetArea[n] = targetSpace;
         }
+
+        return targetArea;
+    }
+
+    public TargetSpace[] HealingElixir(int currentSpace)
+    {
+        TargetSpace[] targetArea = new TargetSpace[1];
+
+        TargetSpace targetSpace = new TargetSpace
+        {
+            space = currentSpace,
+            damage = false,
+            value = 0.18f,
+            stun = false
+        };
+
+        targetArea[0] = targetSpace;
 
         return targetArea;
     }
