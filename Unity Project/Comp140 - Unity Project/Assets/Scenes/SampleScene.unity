@@ -277,6 +277,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boardRef: {fileID: 373684432}
+  potentiometers: 0000000000000000
+  characterAbilities: 0000000000000000
+  currentCharacterAbilities: 0000000000000000
   resistorThreshold: 500
 --- !u!114 &54842460
 MonoBehaviour:
@@ -893,12 +896,12 @@ PrefabInstance:
     - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4,
         type: 3}
       propertyPath: readTimeout
-      value: 20
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4,
         type: 3}
       propertyPath: writeTimeout
-      value: 400
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4,
         type: 3}

@@ -19,6 +19,11 @@ public class CharacterAttacks : MonoBehaviour
 
     protected FullBoard board;
 
+    /*
+     * Sets up a delegate function that can be called from other scripts.
+     * This delegate function will always return an array of target spaces, information on the spell, and must have an input of the current space the character is in.
+     * Delegate functions are set and called in other scripts, using the type object design pattern.
+    */
     public delegate TargetSpace[] Ability(int currentSpace);
 
     public Ability ability1;

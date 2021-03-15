@@ -24,73 +24,6 @@ public class ControllerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        #region Numbers
-        /*
-        if (Input.GetKeyDown("0"))
-        {
-            Debug.Log("KeyPressed");
-
-            Move(0);
-        }
-
-        if (Input.GetKeyDown("1"))
-        {
-            Debug.Log("KeyPressed");
-
-            Move(1);
-        }
-
-        if (Input.GetKeyDown("2"))
-        {
-            Debug.Log("KeyPressed");
-
-            Move(2);
-        }
-
-        if (Input.GetKeyDown("3"))
-        {
-            Debug.Log("KeyPressed");
-
-            Move(3);
-        }
-
-        if (Input.GetKeyDown("4"))
-        {
-            Debug.Log("KeyPressed");
-
-            Move(4);
-        }
-
-        if (Input.GetKeyDown("5"))
-        {
-            Debug.Log("KeyPressed");
-
-            Move(5);
-        }
-
-        if (Input.GetKeyDown("6"))
-        {
-            Debug.Log("KeyPressed");
-
-            Move(6);
-        }
-
-        if (Input.GetKeyDown("7"))
-        {
-            Debug.Log("KeyPressed");
-
-            Move(7);
-        }
-
-        if (Input.GetKeyDown("8"))
-        {
-            Debug.Log("KeyPressed");
-
-            Move(8);
-        }
-        */
-        #endregion
-
         if (Input.GetKeyDown("j"))
         {
             TryEndTurn();
@@ -124,29 +57,6 @@ public class ControllerScript : MonoBehaviour
 
             SelectCharacter(null, 3);
         }
-
-        /*
-        //Select ability
-        if (Input.GetKeyDown("a"))
-        {
-            SelectSpell(1);
-        }
-
-        if (Input.GetKeyDown("s"))
-        {
-            SelectSpell(2);
-        }
-
-        if (Input.GetKeyDown("d"))
-        {
-            SelectSpell(3);
-        }
-
-        if (Input.GetKeyDown("f"))
-        {
-            SelectSpell(4);
-        }
-        */
     }
 
     #endregion

@@ -18,6 +18,8 @@ public class ArduinoController : MonoBehaviour
     private ControllerScript controller;
 
     public int[] potentiometers = new int[2];
+    public int[] characterAbilities = new int[2];
+    public int[] currentCharacterAbilities = new int[2];
 
     [Range(0, 1023)]
 
@@ -124,19 +126,25 @@ public class ArduinoController : MonoBehaviour
 
         #endregion
 
-        if (potentiometers[0] != UduinoManager.Instance.analogRead(AnalogPin.A0))
-        {
-            potentiometers[0] = UduinoManager.Instance.analogRead(AnalogPin.A0);
+        #region Spell Selection
 
-            controller.SelectSpell(0, GetAbilityNum(potentiometers[0]));
+        potentiometers[0] = UduinoManager.Instance.analogRead(AnalogPin.A0);
+        potentiometers[1] = UduinoManager.Instance.analogRead(AnalogPin.A1);
+
+
+        for (int n = 0; n < potentiometers.Length; n++)
+        {
+            characterAbilities[n] = GetAbilityNum(potentiometers[n]);
+
+            if (currentCharacterAbilities[n] != characterAbilities[n])
+            {
+                controller.SelectSpell(n, GetAbilityNum(potentiometers[n]));
+
+                currentCharacterAbilities[n] = characterAbilities[n];
+            }
         }
 
-        if (potentiometers[1] != UduinoManager.Instance.analogRead(AnalogPin.A1))
-        {
-            potentiometers[1] = UduinoManager.Instance.analogRead(AnalogPin.A1);
-
-            controller.SelectSpell(1, GetAbilityNum(potentiometers[1]));
-        }
+        #endregion
 
         /*
         if (UduinoManager.Instance.digitalRead(2) < 1)
@@ -154,7 +162,7 @@ public class ArduinoController : MonoBehaviour
         //controller.EndTurn(endTurn);
     }
 
-#endregion
+    #endregion
 
     #region Movement
 
