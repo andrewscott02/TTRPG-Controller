@@ -17,6 +17,8 @@ public class ArduinoController : MonoBehaviour
 
     private ControllerScript controller;
 
+    public int[] potentiometers = new int[2];
+
     [Range(0, 1023)]
 
     public float resistorThreshold = 0f;
@@ -30,13 +32,14 @@ public class ArduinoController : MonoBehaviour
     {
         controller = GetComponent<ControllerScript>();
         
-        //Movement sensory pins
-
+        //Movement sensory pin setup
         for (int n = 0; n < pins.Length; n++)
         {
             UduinoManager.Instance.pinMode(n + offset, PinMode.Input_pullup);
         }
-        
+
+        UduinoManager.Instance.pinMode(AnalogPin.A0, PinMode.Input);
+        UduinoManager.Instance.pinMode(AnalogPin.A1, PinMode.Input);
 
         /*
         UduinoManager.Instance.pinMode(2, PinMode.Input_pullup);
@@ -61,7 +64,7 @@ public class ArduinoController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        #region Movement
         for (int n = 0; n < pins.Length; n++)
         {
             pins[n] = GetIsPlacedDigital(n + offset);
@@ -119,6 +122,22 @@ public class ArduinoController : MonoBehaviour
             controller.IdlePosition();
         }
 
+        #endregion
+
+        if (potentiometers[0] != UduinoManager.Instance.analogRead(AnalogPin.A0))
+        {
+            potentiometers[0] = UduinoManager.Instance.analogRead(AnalogPin.A0);
+
+            controller.SelectSpell(0, GetAbilityNum(potentiometers[0]));
+        }
+
+        if (potentiometers[1] != UduinoManager.Instance.analogRead(AnalogPin.A1))
+        {
+            potentiometers[1] = UduinoManager.Instance.analogRead(AnalogPin.A1);
+
+            controller.SelectSpell(1, GetAbilityNum(potentiometers[1]));
+        }
+
         /*
         if (UduinoManager.Instance.digitalRead(2) < 1)
         {
@@ -135,7 +154,7 @@ public class ArduinoController : MonoBehaviour
         //controller.EndTurn(endTurn);
     }
 
-    #endregion
+#endregion
 
     #region Movement
 
@@ -174,6 +193,28 @@ public class ArduinoController : MonoBehaviour
         {
             return false;
         }
+    }
+
+    int GetAbilityNum(int value)
+    {
+        if (value < 256)
+        {
+            return 1;
+        }
+        else if (value < 512)
+        {
+            return 2;
+        }
+        else if (value < 768)
+        {
+            return 3;
+        }
+        else if (value >= 768)
+        {
+            return 4;
+        }
+
+        return 1;
     }
 
     #endregion

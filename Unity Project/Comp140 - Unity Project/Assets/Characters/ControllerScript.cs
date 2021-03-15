@@ -125,7 +125,7 @@ public class ControllerScript : MonoBehaviour
             SelectCharacter(null, 3);
         }
 
-
+        /*
         //Select ability
         if (Input.GetKeyDown("a"))
         {
@@ -146,6 +146,7 @@ public class ControllerScript : MonoBehaviour
         {
             SelectSpell(4);
         }
+        */
     }
 
     #endregion
@@ -225,15 +226,18 @@ public class ControllerScript : MonoBehaviour
         }
     }
 
-    public void SelectSpell(int spell)
+    public void SelectSpell(int character, int spell)
     {
         if (currentCharacter != null)
         {
-            currentCharacter.GetComponentInChildren<CharacterController>().SelectAbility(spell);
+            if (characters[character].GetComponentInChildren<CharacterController>() != null)
+            {
+                characters[character].GetComponentInChildren<CharacterController>().SelectAbility(spell);
 
-            board.ResetHighlight();
+                board.ResetHighlight();
 
-            Highlight();
+                Highlight();
+            }
         }
     }
 
