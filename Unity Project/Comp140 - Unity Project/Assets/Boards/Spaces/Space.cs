@@ -137,7 +137,7 @@ public class Space : MonoBehaviour
 
     #region Activate Abilities
 
-    public void Attack(float damage)
+    public void Attack(int damage)
     {
         Instantiate(attackEffect, transform);
 
@@ -149,7 +149,7 @@ public class Space : MonoBehaviour
         }
     }
 
-    public void Heal(float heal)
+    public void Heal(int heal)
     {
         Instantiate(healEffect, transform);
 

@@ -4,20 +4,20 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    public float maxHealth;
-    private float currentHealth;
+    public int maxHealth;
+    private int currentHealth;
 
     private void Start()
     {
         currentHealth = maxHealth;
     }
 
-    public float GetHealth()
+    public int GetHealth()
     {
         return currentHealth;
     }
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(int damage)
     {
         Debug.Log(this.gameObject + " was hit for " + damage);
         currentHealth -= damage;
@@ -26,7 +26,7 @@ public class Health : MonoBehaviour
             Die();
     }
 
-    public void Heal(float heal)
+    public void Heal(int heal)
     {
         Debug.Log(this.gameObject + " was healed for " + heal);
         currentHealth = Mathf.Clamp(currentHealth + heal, 0, maxHealth);
@@ -39,6 +39,7 @@ public class Health : MonoBehaviour
 
     private void Die()
     {
+        //delete target areas
         Invoke("Destroy", 0.2f);
     }
 

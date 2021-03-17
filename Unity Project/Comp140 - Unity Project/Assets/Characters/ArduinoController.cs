@@ -17,9 +17,9 @@ public class ArduinoController : MonoBehaviour
 
     private ControllerScript controller;
 
-    public int[] potentiometers = new int[2];
-    public int[] characterAbilities = new int[2];
-    public int[] currentCharacterAbilities = new int[2];
+    public int[] potentiometers = new int[3];
+    public int[] characterAbilities = new int[3];
+    public int[] currentCharacterAbilities = new int[3];
 
     [Range(0, 1023)]
 
@@ -42,6 +42,7 @@ public class ArduinoController : MonoBehaviour
 
         UduinoManager.Instance.pinMode(AnalogPin.A0, PinMode.Input);
         UduinoManager.Instance.pinMode(AnalogPin.A1, PinMode.Input);
+        UduinoManager.Instance.pinMode(AnalogPin.A2, PinMode.Input);
 
         /*
         UduinoManager.Instance.pinMode(2, PinMode.Input_pullup);
@@ -130,17 +131,21 @@ public class ArduinoController : MonoBehaviour
 
         potentiometers[0] = UduinoManager.Instance.analogRead(AnalogPin.A0);
         potentiometers[1] = UduinoManager.Instance.analogRead(AnalogPin.A1);
+        potentiometers[2] = UduinoManager.Instance.analogRead(AnalogPin.A2);
 
 
         for (int n = 0; n < potentiometers.Length; n++)
         {
             characterAbilities[n] = GetAbilityNum(potentiometers[n]);
 
-            if (currentCharacterAbilities[n] != characterAbilities[n])
+            if (controller.characters[n] != null)
             {
-                controller.SelectSpell(n, GetAbilityNum(potentiometers[n]));
+                if (currentCharacterAbilities[n] != characterAbilities[n])
+                {
+                    controller.SelectSpell(n, GetAbilityNum(potentiometers[n]));
 
-                currentCharacterAbilities[n] = characterAbilities[n];
+                    currentCharacterAbilities[n] = characterAbilities[n];
+                }
             }
         }
 

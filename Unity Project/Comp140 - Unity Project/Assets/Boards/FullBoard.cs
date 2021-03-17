@@ -80,7 +80,7 @@ public class FullBoard : MonoBehaviour
 
     #endregion
 
-    public void Attack(int space, float damage)
+    public void Attack(int space, int damage)
     {
         if (IsSpaceValid(space))
         {
@@ -89,7 +89,7 @@ public class FullBoard : MonoBehaviour
         }
     }
 
-    public void Heal(int space, float heal)
+    public void Heal(int space, int heal)
     {
         if (IsSpaceValid(space))
         {

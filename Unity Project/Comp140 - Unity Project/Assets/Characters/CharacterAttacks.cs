@@ -6,7 +6,7 @@ public class TargetSpace
 {
     public int space;
     public bool damage;
-    public float value;
+    public int value;
     public bool stun;
     public bool shield = false;
 }
@@ -56,7 +56,7 @@ public class CharacterAttacks : MonoBehaviour
             {
                 space = line[n],
                 damage = true,
-                value = 0.4f,
+                value = 40,
                 stun = false
             };
 
@@ -77,7 +77,7 @@ public class CharacterAttacks : MonoBehaviour
             {
                 space = line[n],
                 damage = true,
-                value = 0.2f,
+                value = 20,
                 stun = false
             };
 
@@ -119,11 +119,11 @@ public class CharacterAttacks : MonoBehaviour
 
             if (first)
             {
-                targetSpace.value = 0.3f;
+                targetSpace.value = 30;
             }
             else
             {
-                targetSpace.value = 0.2f;
+                targetSpace.value = 20;
             }
 
             targetArea[n] = targetSpace;
@@ -164,11 +164,11 @@ public class CharacterAttacks : MonoBehaviour
 
             if (first)
             {
-                targetSpace.value = 0.4f;
+                targetSpace.value = 40;
             }
             else
             {
-                targetSpace.value = 0.3f;
+                targetSpace.value = 30;
             }
 
             targetArea[n] = targetSpace;
@@ -188,7 +188,7 @@ public class CharacterAttacks : MonoBehaviour
             {
                 space = radius[n],
                 damage = true,
-                value = 0.15f,
+                value = 15,
                 stun = false
             };
 
@@ -209,7 +209,7 @@ public class CharacterAttacks : MonoBehaviour
             {
                 space = line[n],
                 damage = true,
-                value = 0.4f,
+                value = 40,
                 stun = false
             };
 
@@ -252,7 +252,7 @@ public class CharacterAttacks : MonoBehaviour
             {
                 space = targetSpaces[n],
                 damage = true,
-                value = 0.4f,
+                value = 40,
                 stun = true
             };
 
@@ -291,7 +291,7 @@ public class CharacterAttacks : MonoBehaviour
             {
                 space = targetSpaces[n],
                 damage = true,
-                value = 0.2f,
+                value = 20,
                 stun = false
             };
 
@@ -302,7 +302,7 @@ public class CharacterAttacks : MonoBehaviour
         {
             space = currentSpace,
             damage = false,
-            value = 0.2f,
+            value = 20,
             stun = false
         };
 
@@ -319,7 +319,7 @@ public class CharacterAttacks : MonoBehaviour
         {
             space = currentSpace - 9,
             damage = true,
-            value = 0.2f,
+            value = 20,
             stun = true
         };
 
@@ -357,7 +357,7 @@ public class CharacterAttacks : MonoBehaviour
             {
                 space = targetSpaces[n],
                 damage = true,
-                value = 0.3f,
+                value = 30,
                 stun = true
             };
 
@@ -379,7 +379,7 @@ public class CharacterAttacks : MonoBehaviour
         {
             space = currentSpace,
             damage = false,
-            value = 0.2f,
+            value = 20,
             stun = false
         };
 
@@ -420,11 +420,11 @@ public class CharacterAttacks : MonoBehaviour
 
             if (first)
             {
-                targetSpace.value = 0.05f;
+                targetSpace.value = 5;
             }
             else
             {
-                targetSpace.value = 0.15f;
+                targetSpace.value = 15;
             }
 
             targetArea[n] = targetSpace;
@@ -471,11 +471,11 @@ public class CharacterAttacks : MonoBehaviour
 
             if (first)
             {
-                targetSpace.value = 0f;
+                targetSpace.value = 0;
             }
             else
             {
-                targetSpace.value = 0f;
+                targetSpace.value = 0;
             }
 
             targetArea[n] = targetSpace;
@@ -495,7 +495,7 @@ public class CharacterAttacks : MonoBehaviour
             {
                 space = line[n],
                 damage = false,
-                value = 0.15f,
+                value = 15,
                 stun = false
             };
 
@@ -513,7 +513,7 @@ public class CharacterAttacks : MonoBehaviour
         {
             space = currentSpace,
             damage = false,
-            value = 0.18f,
+            value = 18,
             stun = false
         };
 
